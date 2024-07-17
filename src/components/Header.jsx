@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'left',
     justifyContent: 'center',
-    marginTop: spacing.spacing16,
+    marginTop: spacing.s16,
   },
   headerText: {
-    fontSize: font.size28,
+    fontSize: font.heading.md,
     fontWeight: 'bold',
     color: color.brand.primary,
   },

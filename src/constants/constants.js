@@ -21,37 +21,53 @@ export const color = {
 };
 
 export const font = {
-  size14: 14,
-  size16: 16,
-  size18: 18,
-  size20: 20,
-  size24: 24,
-  size28: 28,
-  size32: 32,
-  size36: 36,
-  size40: 40,
-  size44: 44,
-  size48: 48,
-  size52: 52,
+  heading: {
+    md: 28,
+    lg: 32,
+    xl: 40,
+  },
+  title: {
+    sm: 14,
+    md: 16,
+    lg: 20,
+    xl: 24,
+  },
+  body: {
+    sm: 12,
+    md: 14,
+    lg: 16,
+    xl: 20,
+  }
 };
 
 export const spacing = {
-  spacing2: 2,
-  spacing4: 4,
-  spacing6: 6,
-  spacing8: 8,
-  spacing10: 10,
-  spacing12: 12,
-  spacing14: 14,
-  spacing16: 16,
-  spacing18: 18,
-  spacing20: 20,
-  spacing24: 24,
-  spacing28: 28,
-  spacing32: 32,
-  spacing36: 36,
-  spacing40: 40,
-  spacing44: 44,
-  spacing48: 48,
-  spacing52: 52,
+  s2: 2,
+  s4: 4,
+  s6: 6,
+  s8: 8,
+  s10: 10,
+  s12: 12,
+  s14: 14,
+  s16: 16,
+  s18: 18,
+  s20: 20,
+  s24: 24,
+  s28: 28,
+  s32: 32,
+  s36: 36,
+  s40: 40,
+  s44: 44,
+  s48: 48,
+  s52: 52,
 };
+
+export const border = {
+  radius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+    full: 9999,
+  },
+};
+
