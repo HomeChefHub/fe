@@ -10,7 +10,7 @@ import { svg } from "../assets/svg";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabBar() {
+export default function BottomTabBar() {
   return (
     <Tab.Navigator
       initialRouteName="홈"
