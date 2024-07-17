@@ -4,7 +4,7 @@ import ExchangeScreen from "../screens/Exchange";
 import HomeScreen from "../screens/Home";
 import ChatScreen from "../screens/Chat";
 import MyPageScreen from "../screens/MyPage";
-import { Colors } from "../constants/Colors";
+import { color } from "../constants/constants";
 import { SvgXml } from "react-native-svg";
 import { svgTab } from "../assets/svgTab";
 
@@ -15,8 +15,8 @@ export default function TabBar() {
     <Tab.Navigator
       initialRouteName="홈"
       screenOptions={{
-        tabBarActiveTintColor: Colors.icon.focused,
-        tabBarInactiveTintColor: Colors.icon.primary,
+        tabBarActiveTintColor: color.icon.focused,
+        tabBarInactiveTintColor: color.icon.primary,
         headerShown: false,
       }}>
       <Tab.Screen name="내 냉장고" component={FridgeScreen} options={{
