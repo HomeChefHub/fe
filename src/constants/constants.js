@@ -12,7 +12,9 @@ export const color = {
     secondary: "#DBDEE2",
   },
   text: {
-    primary: "#000000",
+    primary: "rgba(0,0,0,0.85)",
+    secondary: "rgba(0,0,0,0.5)",
+    inverse: "#FFFFFF",
   },
   bg: {
     primary: "#FFFFFF",
@@ -78,6 +80,5 @@ export const shadow = {
   },
   shadowOpacity: 0.25,
   shadowRadius: 3.84,
-
   elevation: 5,
 };

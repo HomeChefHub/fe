@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
   description: {
     fontSize: font.body.md,
     color: color.text.secondary,
-    marginTop: 5,
+    marginTop: spacing.s4,
   },
 });
