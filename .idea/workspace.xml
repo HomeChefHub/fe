@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ec991c1-f0f5-4593-94a0-9b60d77e5b76" name="변경" comment="[chore] 초기 파일 세팅">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="8ec991c1-f0f5-4593-94a0-9b60d77e5b76" name="변경" comment="[feat] '홈화면' 상단 탭바 구현 #2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,26 +30,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.App.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jamin/Desktop/refooding&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.CommitDialog&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.App.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jamin/Desktop/refooding",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "Settings.JavaScript",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/.expo" />
+      <recent name="$PROJECT_DIR$/src/navigations" />
+      <recent name="$PROJECT_DIR$/src/screens/Home" />
+      <recent name="$PROJECT_DIR$/src/screens/Home/FavoriteRecipes" />
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/assets/images" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -76,8 +75,121 @@
       <workItem from="1721144103096" duration="1040000" />
       <workItem from="1721145150690" duration="1731000" />
       <workItem from="1721146931184" duration="476000" />
-      <workItem from="1721147634809" duration="309000" />
+      <workItem from="1721147634809" duration="21897000" />
     </task>
+    <task id="LOCAL-00001" summary="[feat] 하단 탭바 구현 #1">
+      <option name="closed" value="true" />
+      <created>1721178036612</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721178036612</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[chore] node_modules 삭제">
+      <option name="closed" value="true" />
+      <created>1721178472468</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721178472468</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[feat] 하단 탭 바 구현 #1">
+      <option name="closed" value="true" />
+      <created>1721182521467</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721182521467</updated>
+    </task>
+    <task id="LOCAL-00004" summary="[chore] 색상 변수 설정">
+      <option name="closed" value="true" />
+      <created>1721183297966</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721183297966</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[feat] 하단 탭바 구현 #1">
+      <option name="closed" value="true" />
+      <created>1721183848891</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721183848891</updated>
+    </task>
+    <task id="LOCAL-00006" summary="[feat] 하단 탭바 구현 #1">
+      <option name="closed" value="true" />
+      <created>1721183900788</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721183900788</updated>
+    </task>
+    <task id="LOCAL-00007" summary="[chore] font, spacing,변수 설정 및 글로벌스타일 추가">
+      <option name="closed" value="true" />
+      <created>1721185970391</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721185970391</updated>
+    </task>
+    <task id="LOCAL-00008" summary="[feat] Header 컴포넌트 추가 #1">
+      <option name="closed" value="true" />
+      <created>1721186079332</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721186079332</updated>
+    </task>
+    <task id="LOCAL-00009" summary="[feat] SearchInput 컴포넌트 추가 #1">
+      <option name="closed" value="true" />
+      <created>1721189790801</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721189790801</updated>
+    </task>
+    <task id="LOCAL-00010" summary="[feat] SearchInput 컴포넌트 추가 #1">
+      <option name="closed" value="true" />
+      <created>1721192132459</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1721192132459</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[feat] SearchInput 컴포넌트 추가 #1">
+      <option name="closed" value="true" />
+      <created>1721192158451</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721192158451</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[feat] '홈화면' 상단 탭바 구현 #2">
+      <option name="closed" value="true" />
+      <created>1721195362402</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721195362402</updated>
+    </task>
+    <task id="LOCAL-00013" summary="[feat] '홈화면' 상단 탭바 구현 #2">
+      <option name="closed" value="true" />
+      <created>1721195390241</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721195390241</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[feat] '홈화면' 상단 탭바 구현 #2">
+      <option name="closed" value="true" />
+      <created>1721195433852</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1721195433853</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +220,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update issue templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="[chore] node_modules 삭제" />
+    <MESSAGE value="[feat] 하단 탭 바 구현 #1" />
+    <MESSAGE value="[chore] 색상 변수 설정" />
+    <MESSAGE value="[feat] 하단 탭바 구현 #1" />
+    <MESSAGE value="[chore] font, spacing,변수 설정 및 글로벌스타일 추가" />
+    <MESSAGE value="[feat] Header 컴포넌트 추가 #1" />
+    <MESSAGE value="[feat] SearchInput 컴포넌트 추가 #1" />
+    <MESSAGE value="[feat] '홈화면' 상단 탭바 구현 #2" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feat] '홈화면' 상단 탭바 구현 #2" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

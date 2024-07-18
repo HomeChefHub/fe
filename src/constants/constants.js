@@ -1,23 +1,23 @@
 export const color = {
   brand: {
-    primary: '#00BCD4',
-    secondary: '#CCCCFF',
+    primary: "#00BCD4",
+    secondary: "#CCCCFF",
   },
   icon: {
-    primary: '#000000',
-    focused: '#00BCD4'
+    primary: "#000000",
+    focused: "#00BCD4",
   },
   border: {
-    primary: '#C2C9CE',
-    secondary: '#DBDEE2',
+    primary: "#C2C9CE",
+    secondary: "#DBDEE2",
   },
   text: {
-    primary: '#000000',
+    primary: "#000000",
   },
   bg: {
-    primary: '#FFFFFF',
-    secondary: '#EAECEF',
-  }
+    primary: "#FFFFFF",
+    secondary: "#EAECEF",
+  },
 };
 
 export const font = {
@@ -37,7 +37,7 @@ export const font = {
     md: 14,
     lg: 16,
     xl: 20,
-  }
+  },
 };
 
 export const spacing = {
@@ -71,3 +71,13 @@ export const border = {
   },
 };
 
+export const shadow = {
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+
+  elevation: 5,
+};
