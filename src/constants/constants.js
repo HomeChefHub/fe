@@ -20,6 +20,7 @@ export const color = {
     primary: "#FFFFFF",
     secondary: "#EAECEF",
   },
+  red: "#FF3369",
 };
 
 export const font = {
