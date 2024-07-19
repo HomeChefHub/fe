@@ -2,11 +2,11 @@ import { FlatList, View, StyleSheet } from "react-native";
 import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
-import FridgeCard from "./_components/FridgeCard";
 
 import fridgeSample from "../../assets/fridge.png";
 import { CustomButton } from "../../components/CustomButton";
 import { spacing } from "../../constants/constants";
+import { CustomRowCard } from "../../components/CustomRowCard";
 
 const fridges = [
   {
@@ -50,7 +50,7 @@ export default function FridgeScreen() {
         data={fridges}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <FridgeCard uri={item.uri} title={item.title} date={item.date} />
+          <CustomRowCard uri={item.uri} title={item.title} date={item.date} />
         )}
       />
       <View style={styles.button}>
