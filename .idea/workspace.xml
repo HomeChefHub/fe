@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ec991c1-f0f5-4593-94a0-9b60d77e5b76" name="변경" comment="[feat] '홈화면' 상단 탭바 구현 #2" />
+    <list default="true" id="8ec991c1-f0f5-4593-94a0-9b60d77e5b76" name="변경" comment="[feat] '식재료 교환 게시판' 메인화면 UI 구현 #4">
+      <change afterPath="$PROJECT_DIR$/src/assets/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Chat/_components/ChatList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Chat/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Chat/index.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,29 +35,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.App.js.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/jamin/Desktop/refooding",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Settings.JavaScript",
-    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.App.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jamin/Desktop/refooding&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/jamin/Desktop/refooding/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/navigations" />
       <recent name="$PROJECT_DIR$/src/screens/Home" />
       <recent name="$PROJECT_DIR$/src/screens/Home/FavoriteRecipes" />
-      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
     </key>
   </component>
@@ -76,6 +84,9 @@
       <workItem from="1721145150690" duration="1731000" />
       <workItem from="1721146931184" duration="476000" />
       <workItem from="1721147634809" duration="21897000" />
+      <workItem from="1721262986980" duration="18121000" />
+      <workItem from="1721616037223" duration="76000" />
+      <workItem from="1721616218238" duration="5302000" />
     </task>
     <task id="LOCAL-00001" summary="[feat] 하단 탭바 구현 #1">
       <option name="closed" value="true" />
@@ -189,7 +200,47 @@
       <option name="project" value="LOCAL" />
       <updated>1721195433853</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="[feat] '홈화면' '홈화면' 페이지 초기 레이아웃 구현 #2">
+      <option name="closed" value="true" />
+      <created>1721268132304</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1721268132304</updated>
+    </task>
+    <task id="LOCAL-00016" summary="[feat] 버튼 컴포넌트 구현 및 컴포넌트 이름 변경 #1">
+      <option name="closed" value="true" />
+      <created>1721273512271</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1721273512271</updated>
+    </task>
+    <task id="LOCAL-00017" summary="[feat] '내 냉장고' 메인화면 구현 #3">
+      <option name="closed" value="true" />
+      <created>1721273552671</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1721273552671</updated>
+    </task>
+    <task id="LOCAL-00018" summary="[feat] 가로 카드모양 컴포넌트 구현">
+      <option name="closed" value="true" />
+      <created>1721355306511</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1721355306511</updated>
+    </task>
+    <task id="LOCAL-00019" summary="[feat] '식재료 교환 게시판' 메인화면 UI 구현 #4">
+      <option name="closed" value="true" />
+      <created>1721355413137</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1721355413137</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +279,13 @@
     <MESSAGE value="[feat] Header 컴포넌트 추가 #1" />
     <MESSAGE value="[feat] SearchInput 컴포넌트 추가 #1" />
     <MESSAGE value="[feat] '홈화면' 상단 탭바 구현 #2" />
-    <option name="LAST_COMMIT_MESSAGE" value="[feat] '홈화면' 상단 탭바 구현 #2" />
+    <MESSAGE value="[feat] '홈화면' '홈화면' 페이지 초기 레이아웃 구현 #2" />
+    <MESSAGE value="[feat] 버튼 컴포넌트 구현 및 컴포넌트 이름 변경 #1" />
+    <MESSAGE value="[feat] '내 냉장고' 메인화면 구현 #3" />
+    <MESSAGE value="[feat] 가로 카드모양 컴포넌트 구현 #1" />
+    <MESSAGE value="[feat] 가로 카드모양 컴포넌트 구현 #1" />
+    <MESSAGE value="[feat] '식재료 교환 게시판' 메인화면 UI 구현 #4" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feat] '식재료 교환 게시판' 메인화면 UI 구현 #4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
