@@ -1,23 +1,11 @@
-import { Text, View, StyleSheet, Image } from "react-native";
-import { border, color, font, spacing } from "../../../constants/constants";
-import { SvgXml } from "react-native-svg";
-import { svg } from "../../../assets/svg";
+import { Text, View, StyleSheet } from "react-native";
+import { color, font, spacing } from "../../../constants/constants";
+import CustomProfileImage from "../../../components/CustomProfileImage";
 
 export default function ChatList({ uri, nickname, message }) {
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        {uri ? (
-          <Image source={uri} style={styles.image} />
-        ) : (
-          <SvgXml
-            xml={svg.user}
-            fill={color.bg.primary}
-            width="36"
-            height="36"
-          />
-        )}
-      </View>
+      <CustomProfileImage uri={uri} />
       <View style={styles.textContainer}>
         <Text style={styles.nickname}>{nickname}</Text>
         <Text style={styles.message} numberOfLines={1}>
@@ -35,19 +23,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-  },
-  imageContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: border.radius.lg,
-    backgroundColor: color.border.secondary,
-    marginRight: spacing.s16,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  image: {
-    height: 50,
   },
   textContainer: {
     flex: 1,
