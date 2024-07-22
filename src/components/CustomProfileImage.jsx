@@ -17,8 +17,8 @@ export default function CustomProfileImage({ uri }) {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     borderRadius: border.radius.lg,
     backgroundColor: color.border.secondary,
     marginRight: spacing.s16,

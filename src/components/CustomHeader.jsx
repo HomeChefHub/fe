@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     alignItems: "left",
     justifyContent: "center",
     marginTop: spacing.s16,
+    marginBottom: spacing.s16,
   },
   headerText: {
     fontSize: font.heading.md,
