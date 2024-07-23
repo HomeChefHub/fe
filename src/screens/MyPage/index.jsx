@@ -20,7 +20,7 @@ export default function MyPageScreen() {
       <View style={styles.profileContainer}>
         <CustomProfileImage />
         <Text style={styles.nickname}>닉네임</Text>
-        <CustomButton text={"프로필 수정"} width={100} />
+        <CustomButton text={"프로필 수정"} style={{ width: 100 }} />
       </View>
       <View style={styles.listContainer}>
         {myPageList.map((item) => (
