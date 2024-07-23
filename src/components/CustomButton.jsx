@@ -2,9 +2,9 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { border, color, font, spacing } from "../constants/constants";
 
-export const CustomButton = ({ text, width, onPress }) => {
+export const CustomButton = ({ text, style, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.button, { width }]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -13,7 +13,7 @@ export const CustomButton = ({ text, width, onPress }) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: color.brand.primary,
-    padding: spacing.s12,
+    paddingVertical: spacing.s12,
     borderRadius: border.radius.sm,
     alignItems: "center",
     justifyContent: "center",
