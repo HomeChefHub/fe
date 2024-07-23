@@ -1,11 +1,10 @@
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View } from "react-native";
 import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 
 import fridgeSample from "../../assets/fridge.png";
-import { CustomButton } from "../../components/CustomButton";
-import { spacing } from "../../constants/constants";
+import { CustomAddButton } from "../../components/CustomAddButton";
 import { CustomRowCard } from "../../components/CustomRowCard";
 
 const fridges = [
@@ -53,17 +52,9 @@ export default function FridgeScreen() {
           <CustomRowCard uri={item.uri} title={item.title} date={item.date} />
         )}
       />
-      <View style={styles.button}>
-        <CustomButton text={"+ 추가"} width={87} />
+      <View>
+        <CustomAddButton text={"+ 추가"} width={87} />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    position: "absolute",
-    right: spacing.s16,
-    bottom: spacing.s16,
-  },
-});

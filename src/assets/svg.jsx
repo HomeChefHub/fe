@@ -36,4 +36,8 @@ export const svg = {
 <path d="M12 12.5L20 20.5" stroke="#343330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M16 28.5C22.6274 28.5 28 23.1274 28 16.5C28 9.87258 22.6274 4.5 16 4.5C9.37258 4.5 4 9.87258 4 16.5C4 23.1274 9.37258 28.5 16 28.5Z" stroke="#343330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`,
+  back: `<svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 16L1.5 8.5L9 1" stroke="black" stroke-opacity="0.85" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
 };

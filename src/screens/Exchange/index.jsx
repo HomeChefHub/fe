@@ -5,6 +5,7 @@ import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomRowCard } from "../../components/CustomRowCard";
 
 import exchangeSample from "../../assets/exchange.png";
+import { CustomAddButton } from "../../components/CustomAddButton";
 
 const exchanges = [
   {
@@ -46,7 +47,7 @@ const exchanges = [
   },
 ];
 
-export default function ExchangeScreen() {
+export default function ExchangeScreen({ navigation }) {
   return (
     <View style={globalStyles.container}>
       <CustomHeader title={"식재료 교환 게시판"} />
@@ -65,6 +66,13 @@ export default function ExchangeScreen() {
           />
         )}
       />
+      <View>
+        <CustomAddButton
+          text={"+ 추가"}
+          width={87}
+          onPress={() => navigation.navigate("ExchangeRegister")}
+        />
+      </View>
     </View>
   );
 }

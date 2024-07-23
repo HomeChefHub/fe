@@ -2,10 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import CustomProfileImage from "../../components/CustomProfileImage";
-import { CustomButton } from "../../components/CustomButton";
 import { color, font, spacing } from "../../constants/constants";
 import { SvgXml } from "react-native-svg";
 import { svg } from "../../assets/svg";
+import { CustomButton } from "../../components/CustomButton";
 
 const myPageList = [
   { key: "notice", label: "공지사항", icon: svg.bell },
