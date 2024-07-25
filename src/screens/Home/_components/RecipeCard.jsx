@@ -9,14 +9,13 @@ import {
 } from "../../../constants/constants";
 import DropShadow from "react-native-drop-shadow";
 
-export const RecipeCard = ({ uri, title, description }) => {
+export const RecipeCard = ({ img, name }) => {
   return (
     <DropShadow style={shadow}>
       <View style={styles.container}>
-        <Image source={uri} style={styles.image} />
+        <Image source={{ uri: img }} style={styles.image} />
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.title}>{name}</Text>
         </View>
       </View>
     </DropShadow>

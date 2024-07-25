@@ -3,9 +3,29 @@ import { globalStyles } from "../../constants/global";
 import { color, font, spacing } from "../../constants/constants";
 import { RecipeCard } from "./_components/RecipeCard";
 
-import sampleRecipe from "../../assets/recipe.png";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function RecommendedRecipesScreen() {
+  const [recipeList, setRecipeList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchRecipe = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/v1/recipes", {
+        params: { page: 0, size: 10 },
+      });
+      setRecipeList(res.data.content);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecipe();
+  }, []);
+
   return (
     <ScrollView style={globalStyles.container}>
       <View style={styles.textContainer}>
@@ -13,21 +33,11 @@ export default function RecommendedRecipesScreen() {
         <Text style={styles.text}>냉장고 속 식재료로 만들 수 있는</Text>
         <Text style={styles.text}>맛있는 레시피를 추천해드릴게요!</Text>
       </View>
-      <RecipeCard
-        uri={sampleRecipe}
-        title="김치볶음밥"
-        description="간편하게 즐길 수 있는 김치볶음밥"
-      />
-      <RecipeCard
-        uri={sampleRecipe}
-        title="김치볶음밥"
-        description="간편하게 즐길 수 있는 김치볶음밥"
-      />
-      <RecipeCard
-        uri={sampleRecipe}
-        title="김치볶음밥"
-        description="간편하게 즐길 수 있는 김치볶음밥"
-      />
+      <View>
+        {recipeList.map((recipe) => (
+          <RecipeCard key={recipe.id} img={recipe.imgSrc} name={recipe.name} />
+        ))}
+      </View>
     </ScrollView>
   );
 }
