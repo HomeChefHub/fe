@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { border, color, font, spacing } from "../constants/constants";
+import { border, color, font } from "../constants/constants";
 
 export const CustomButton = ({ text, style, onPress }) => {
   return (
@@ -12,8 +12,8 @@ export const CustomButton = ({ text, style, onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
+    height: 40,
     backgroundColor: color.brand.primary,
-    paddingVertical: spacing.s12,
     borderRadius: border.radius.sm,
     alignItems: "center",
     justifyContent: "center",
