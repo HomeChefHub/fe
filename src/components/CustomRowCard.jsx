@@ -1,15 +1,22 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import DropShadow from "react-native-drop-shadow";
 import { border, color, font, shadow, spacing } from "../constants/constants";
 import { SvgXml } from "react-native-svg";
 import { svg } from "../assets/svg";
 
-export const CustomRowCard = ({ uri, title, location, date, status }) => {
+export const CustomRowCard = ({
+  uri,
+  title,
+  location,
+  date,
+  status,
+  onPress,
+}) => {
   const isReserved = status === "ACTIVE";
   return (
     <DropShadow style={shadow}>
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={onPress}>
         {uri && <Image source={uri} style={styles.image} />}
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>
@@ -50,7 +57,7 @@ export const CustomRowCard = ({ uri, title, location, date, status }) => {
             </View>
           )}
         </View>
-      </View>
+      </TouchableOpacity>
     </DropShadow>
   );
 };

@@ -38,6 +38,9 @@ export default function ExchangeScreen({ navigation }) {
             location={exchange.region + " " + exchange.childRegion}
             date={exchange.createDate}
             status={exchange.status}
+            onPress={() =>
+              navigation.navigate("ExchangeDetail", { id: exchange.exchangeId })
+            }
           />
         ))}
       </ScrollView>
