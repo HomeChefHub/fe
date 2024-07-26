@@ -6,11 +6,11 @@ import { SvgXml } from "react-native-svg";
 import { svg } from "../assets/svg";
 
 export const CustomRowCard = ({ uri, title, location, date, status }) => {
-  const isReserved = status === "예약 중";
+  const isReserved = status === "ACTIVE";
   return (
     <DropShadow style={shadow}>
       <View style={styles.container}>
-        <Image source={uri} style={styles.image} />
+        {uri && <Image source={uri} style={styles.image} />}
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>
           <View style={styles.descriptionContainer}>
@@ -45,7 +45,7 @@ export const CustomRowCard = ({ uri, title, location, date, status }) => {
                   },
                 ]}
               >
-                {status}
+                {isReserved ? "예약 중" : "거래완료"}
               </Text>
             </View>
           )}

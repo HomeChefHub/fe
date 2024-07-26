@@ -1,71 +1,46 @@
-import { FlatList, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomRowCard } from "../../components/CustomRowCard";
 
-import exchangeSample from "../../assets/exchange.png";
 import { CustomAddButton } from "../../components/CustomAddButton";
-
-const exchanges = [
-  {
-    id: "1",
-    uri: exchangeSample,
-    title: "두바이 초콜릿 드실 분~",
-    location: "송파구 송파1동",
-    date: " 2024.07.11",
-    status: "예약 중",
-  },
-  {
-    id: "2",
-    uri: exchangeSample,
-    title: "두바이 초콜릿 드실 분~",
-    location: "송파구 송파1동",
-    date: " 2024.07.11",
-    status: "거래 완료",
-  },
-  {
-    id: "3",
-    uri: exchangeSample,
-    title: "두바이 초콜릿 드실 분~",
-    location: "송파구 송파1동",
-    date: " 2024.07.11",
-  },
-  {
-    id: "4",
-    uri: exchangeSample,
-    title: "두바이 초콜릿 드실 분~",
-    location: "송파구 송파1동",
-    date: " 2024.07.11",
-  },
-  {
-    id: "5",
-    uri: exchangeSample,
-    title: "두바이 초콜릿 드실 분~",
-    location: "송파구 송파1동",
-    date: " 2024.07.11",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ExchangeScreen({ navigation }) {
+  const [exchangeList, setExchangeList] = useState([]);
+
+  const fetchExchangeList = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/v1/exchanges");
+      setExchangeList(res.data.content);
+      // setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchExchangeList();
+  }, []);
+
   return (
     <View style={globalStyles.container}>
       <CustomHeader title={"식재료 교환 게시판"} />
       <CustomSearchInput placeholder={"찾으시는 재료가 있나요?"} />
-      <FlatList
-        data={exchanges}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+      <ScrollView>
+        {exchangeList.map((exchange) => (
           <CustomRowCard
-            uri={item.uri}
-            title={item.title}
-            location={item.location}
-            date={item.date}
-            status={item.status}
-            heartCount={item.heartCount}
+            key={exchange.exchangeId}
+            uri={exchange.uri}
+            title={exchange.title}
+            location={exchange.region + " " + exchange.childRegion}
+            date={exchange.createDate}
+            status={exchange.status}
           />
-        )}
-      />
+        ))}
+      </ScrollView>
       <View>
         <CustomAddButton
           text={"+ 추가"}
