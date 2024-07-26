@@ -10,7 +10,7 @@ export default function RecommendedRecipesScreen() {
   const [recipeList, setRecipeList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchRecipe = async () => {
+  const fetchRecipes = async () => {
     try {
       const res = await axios.get("http://localhost:8080/api/v1/recipes", {
         params: { page: 0, size: 10 },
@@ -23,7 +23,7 @@ export default function RecommendedRecipesScreen() {
   };
 
   useEffect(() => {
-    fetchRecipe();
+    fetchRecipes();
   }, []);
 
   return (
@@ -35,7 +35,12 @@ export default function RecommendedRecipesScreen() {
       </View>
       <View>
         {recipeList.map((recipe) => (
-          <RecipeCard key={recipe.id} img={recipe.imgSrc} name={recipe.name} />
+          <RecipeCard
+            key={recipe.id}
+            id={recipe.id}
+            img={recipe.imgSrc}
+            name={recipe.name}
+          />
         ))}
       </View>
     </ScrollView>

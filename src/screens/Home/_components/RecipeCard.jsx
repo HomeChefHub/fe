@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import {
   border,
   color,
@@ -8,16 +8,22 @@ import {
   spacing,
 } from "../../../constants/constants";
 import DropShadow from "react-native-drop-shadow";
+import { useNavigation } from "@react-navigation/native";
 
-export const RecipeCard = ({ img, name }) => {
+export const RecipeCard = ({ id, img, name }) => {
+  const navigation = useNavigation();
+
   return (
     <DropShadow style={shadow}>
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate("RecipeDetail", { id })}
+      >
         <Image source={{ uri: img }} style={styles.image} />
         <View style={styles.textContainer}>
           <Text style={styles.title}>{name}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </DropShadow>
   );
 };
