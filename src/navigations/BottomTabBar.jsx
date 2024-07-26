@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FridgeScreen from "../screens/Fridge";
-import HomeScreen from "../screens/Home";
 import ChatScreen from "../screens/Chat";
 import MyPageScreen from "../screens/MyPage";
 import { color } from "../constants/constants";
 import { SvgXml } from "react-native-svg";
 import { svg } from "../assets/svg";
-import ExchangeStackNavigator from "./StackNavigator";
+import ExchangeStackNavigator from "./ExchangeStackNavigator";
+import HomeStackNavigator from "./HomeStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,7 +47,7 @@ export default function BottomTabBar() {
       />
       <Tab.Screen
         name="홈"
-        component={HomeScreen}
+        component={HomeStackNavigator}
         options={{
           tabBarLabel: "홈",
           tabBarIcon: ({ color, size }) => (
