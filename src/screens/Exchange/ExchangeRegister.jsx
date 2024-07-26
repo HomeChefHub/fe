@@ -32,7 +32,10 @@ export default function ExchangeRegister() {
             <CustomDropDown placeholder={"구"} />
           </View>
         </View>
-        <CustomButton style={styles.button} text={"수정하기"} />
+        <CustomButton
+          style={[styles.button, { height: 50 }]}
+          text={"등록하기"}
+        />
       </ScrollView>
     </View>
   );
