@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
 import { globalStyles } from "../../constants/global";
@@ -7,8 +7,53 @@ import { CustomButton } from "../../components/CustomButton";
 import { font, spacing } from "../../constants/constants";
 import CustomImageUploadField from "../../components/CustomImageUploadField";
 import CustomDropDown from "../../components/CustomDropDown";
+import axios from "axios";
 
 export default function ExchangeRegister() {
+  const [regions, setRegions] = useState([]);
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const fetchRegion = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8080/api/v1/exchanges/regions",
+      );
+      setRegions(res.data);
+
+      setProvinces(
+        res.data.map((region) => ({
+          label: region.name,
+          value: region.name,
+        })),
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRegion();
+  }, []);
+
+  const handleProvinceChange = (selected) => {
+    setSelectedProvince(selected);
+
+    const selectedRegion = regions.find((region) => region.name === selected);
+    setCities(
+      selectedRegion.childRegions.map((city) => ({
+        label: city.name,
+        value: city.name,
+      })),
+    );
+  };
+
+  const handleCityChange = (selected) => {
+    setSelectedCity(selected);
+  };
+
   return (
     <View style={globalStyles.container}>
       <CustomGoBackHeader text={"게시물 작성"} />
@@ -28,8 +73,16 @@ export default function ExchangeRegister() {
         <View>
           <Text style={styles.regionTitle}>지역</Text>
           <View style={styles.dropDownContainer}>
-            <CustomDropDown placeholder={"시"} />
-            <CustomDropDown placeholder={"구"} />
+            <CustomDropDown
+              placeholder={"시, 도"}
+              data={provinces}
+              onChange={handleProvinceChange}
+            />
+            <CustomDropDown
+              placeholder={"구"}
+              data={cities}
+              onChange={handleCityChange}
+            />
           </View>
         </View>
         <CustomButton

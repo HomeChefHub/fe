@@ -3,17 +3,8 @@ import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { border, color, spacing } from "../constants/constants";
 
-const data = [
-  { label: "Item 1", value: "1" },
-  { label: "Item 2", value: "2" },
-  { label: "Item 3", value: "3" },
-  { label: "Item 4", value: "4" },
-  { label: "Item 5", value: "5" },
-  { label: "Item 6", value: "6" },
-];
-
-export default function DropdownComponent({ placeholder }) {
-  const [value, setValue] = useState(null);
+export default function CustomDropDown({ placeholder, data, onChange }) {
+  const [value, setValue] = useState("");
 
   return (
     <Dropdown
@@ -25,8 +16,9 @@ export default function DropdownComponent({ placeholder }) {
       valueField="value"
       placeholder={placeholder}
       value={value}
-      onChange={(item) => {
-        setValue(item.value);
+      onChange={(selected) => {
+        setValue(selected.value);
+        onChange(selected.value);
       }}
     />
   );
