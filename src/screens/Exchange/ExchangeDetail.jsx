@@ -6,6 +6,7 @@ import axios from "axios";
 import { globalStyles } from "../../constants/global";
 import CustomProfileImage from "../../components/CustomProfileImage";
 import { CustomButton } from "../../components/CustomButton";
+import { handleDateFormat } from "../../services/handleDateFormat";
 
 export default function ExchangeDetailScreen({ route }) {
   const { id } = route.params;
@@ -51,7 +52,7 @@ export default function ExchangeDetailScreen({ route }) {
       <View style={styles.contentContainer}>
         <Text style={styles.contentTitle}>{title}</Text>
         <Text styles={{ font: font.body.lg }}>{content}</Text>
-        <Text style={styles.contentDate}>{createDate}</Text>
+        <Text style={styles.contentDate}>{handleDateFormat(createDate)}</Text>
       </View>
     </View>
   );

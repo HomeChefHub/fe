@@ -7,6 +7,7 @@ import { CustomRowCard } from "../../components/CustomRowCard";
 import { CustomAddButton } from "../../components/CustomAddButton";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { handleDateFormat } from "../../services/handleDateFormat";
 
 export default function ExchangeScreen({ navigation }) {
   const [exchangeList, setExchangeList] = useState([]);
@@ -33,10 +34,11 @@ export default function ExchangeScreen({ navigation }) {
         {exchangeList.map((exchange) => (
           <CustomRowCard
             key={exchange.exchangeId}
+            id={exchange.exchangeId}
             uri={exchange.uri}
             title={exchange.title}
             location={exchange.region + " " + exchange.childRegion}
-            date={exchange.createDate}
+            date={handleDateFormat(exchange.createDate)}
             status={exchange.status}
             onPress={() =>
               navigation.navigate("ExchangeDetail", { id: exchange.exchangeId })
