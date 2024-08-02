@@ -1,4 +1,11 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { globalStyles } from "../../constants/global";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -10,12 +17,42 @@ import { svg } from "../../assets/svg";
 export default function RecipeDetailScreen({ route }) {
   const { id } = route.params;
   const [recipeList, setRecipeList] = useState({});
+  const [isFavorite, setIsFavorite] = useState(false);
+  const memberId = 1;
 
   const fetchRecipeDetail = async () => {
     try {
       const res = await axios.get(`http://localhost:8080/api/v1/recipes/${id}`);
       setRecipeList(res.data);
-      // setIsLoading(false);
+      checkIsFavorite(res.data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchFavorites = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/api/v1/recipes/members/${memberId}/favorites?size=5`,
+      );
+      return res.data.content;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkIsFavorite = async () => {
+    const favorites = await fetchFavorites();
+    const isFavorite = favorites.find((recipe) => recipe.id === id);
+    setIsFavorite(isFavorite);
+  };
+
+  const handleFavorites = async () => {
+    try {
+      await axios.post(
+        `http://localhost:8080/api/v1/recipes/toggle-favorite/${memberId}/${id}`,
+      );
+      setIsFavorite(!isFavorite);
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +75,12 @@ export default function RecipeDetailScreen({ route }) {
       <CustomGoBackHeader text={name} />
       <View style={styles.imgContainer}>
         <Image source={{ uri: imgSrc }} style={styles.image} />
+        <TouchableOpacity
+          style={styles.heartIconContainer}
+          onPress={handleFavorites}
+        >
+          <SvgXml xml={isFavorite ? svg.heartFilled : svg.heart} />
+        </TouchableOpacity>
       </View>
 
       <View>
@@ -84,11 +127,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: spacing.s20,
+    position: "relative",
   },
   image: {
     width: "100%",
     height: "100%",
     borderRadius: border.radius.md,
+  },
+  heartIconContainer: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    zIndex: 1,
   },
   title: {
     fontSize: font.title.md,
