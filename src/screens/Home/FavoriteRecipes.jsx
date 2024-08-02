@@ -1,29 +1,62 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
+import {
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { globalStyles } from "../../constants/global";
 import { color, font, spacing } from "../../constants/constants";
 import { RecipeCard } from "./_components/RecipeCard";
-
-import sampleRecipe from "../../assets/recipe.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function RecommendedRecipesScreen() {
+  const [favoriteRecipeList, setFavoriteRecipeList] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [count, setCount] = useState(0);
+  const memberId = 1;
+
+  const fetchFavoriteRecipes = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/api/v1/recipes/members/${memberId}/favorites`,
+      );
+      setFavoriteRecipeList(res.data.content);
+      setCount(res.data.content.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await fetchFavoriteRecipes();
+    setIsRefreshing(false);
+  };
+
+  useEffect(() => {
+    fetchFavoriteRecipes();
+  }, []);
+
   return (
-    <ScrollView style={globalStyles.container}>
-      <Text style={styles.countText}>총 13개</Text>
-      <RecipeCard
-        uri={sampleRecipe}
-        title="김치볶음밥"
-        description="간편하게 즐길 수 있는 김치볶음밥"
-      />
-      <RecipeCard
-        uri={sampleRecipe}
-        title="김치볶음밥"
-        description="간편하게 즐길 수 있는 김치볶음밥"
-      />
-      <RecipeCard
-        uri={sampleRecipe}
-        title="김치볶음밥"
-        description="간편하게 즐길 수 있는 김치볶음밥"
-      />
+    <ScrollView
+      style={globalStyles.container}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+      }
+    >
+      <Text style={styles.countText}>총 {count}개</Text>
+      <View>
+        {favoriteRecipeList.map((recipe) => (
+          <RecipeCard
+            key={recipe.id}
+            id={recipe.id}
+            img={recipe.imgSrc}
+            name={recipe.name}
+          />
+        ))}
+      </View>
     </ScrollView>
   );
 }
