@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
 import { border, color, font, spacing } from "../../constants/constants";
@@ -7,19 +7,23 @@ import { globalStyles } from "../../constants/global";
 import CustomProfileImage from "../../components/CustomProfileImage";
 import { CustomButton } from "../../components/CustomButton";
 import { handleDateFormat } from "../../services/handleDateFormat";
+import { useNavigation } from "@react-navigation/native";
+import Modal from "react-native-modal";
 
 export default function ExchangeDetailScreen({ route }) {
-  const { id } = route.params;
+  const { exchangeId } = route.params;
+  const navigation = useNavigation();
+  const id = 1;
 
   const [exchangeDetail, setExchangeDetail] = useState({});
+  const [isModal, setIsModal] = useState(false);
 
   const fetchRecipeDetail = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/v1/exchanges/${id}`,
+        `http://localhost:8080/api/v1/exchanges/${exchangeId}`,
       );
       setExchangeDetail(res.data);
-      // setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -29,11 +33,35 @@ export default function ExchangeDetailScreen({ route }) {
     fetchRecipeDetail();
   }, []);
 
-  const { title, content, region, childRegion, status, createDate } =
+  const { title, content, region, childRegion, status, createDate, memberId } =
     exchangeDetail;
 
+  const handleEditButton = () => {
+    navigation.navigate("EditExchangeScreen", { exchangeId });
+  };
+
+  const handleDeleteButton = () => {
+    setIsModal(true); // Show the custom modal
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:8080/api/v1/exchanges/${exchangeId}`,
+      );
+      setIsModal(false);
+      navigation.goBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setIsModal(false);
+  };
+
   return (
-    <View style={globalStyles.container}>
+    <ScrollView style={globalStyles.container}>
       <CustomGoBackHeader
         text={status === "ACTIVE" ? "예약 중" : "거래 완료"}
       />
@@ -51,10 +79,54 @@ export default function ExchangeDetailScreen({ route }) {
       <View style={styles.divider} />
       <View style={styles.contentContainer}>
         <Text style={styles.contentTitle}>{title}</Text>
-        <Text styles={{ font: font.body.lg }}>{content}</Text>
+        <Text style={styles.contentBody}>{content}</Text>
         <Text style={styles.contentDate}>{handleDateFormat(createDate)}</Text>
       </View>
-    </View>
+      {id === memberId && (
+        <>
+          <View style={styles.buttonContainer}>
+            <CustomButton
+              text={"수정"}
+              style={{
+                width: 60,
+                backgroundColor: color.border.primary,
+                marginRight: spacing.s16,
+              }}
+              onPress={handleEditButton}
+            />
+            <CustomButton
+              text={"삭제"}
+              style={{ width: 60, backgroundColor: color.border.primary }}
+              onPress={handleDeleteButton}
+            />
+          </View>
+
+          <Modal
+            isVisible={isModal}
+            onBackdropPress={handleCancelDelete}
+            style={styles.modalContainer}
+          >
+            <View style={styles.modalContent}>
+              <Text style={styles.modalMessage}>
+                게시물을 삭제하시겠습니까?
+              </Text>
+              <View style={styles.modalButtons}>
+                <CustomButton
+                  text={"삭제"}
+                  onPress={handleConfirmDelete}
+                  style={styles.modalButton}
+                />
+                <CustomButton
+                  text={"취소"}
+                  onPress={handleCancelDelete}
+                  style={styles.modalButton}
+                />
+              </View>
+            </View>
+          </Modal>
+        </>
+      )}
+    </ScrollView>
   );
 }
 
@@ -88,8 +160,39 @@ const styles = StyleSheet.create({
     fontSize: font.title.lg,
     marginBottom: spacing.s36,
   },
+  contentBody: {
+    fontSize: font.body.lg,
+  },
   contentDate: {
     marginTop: spacing.s36,
     color: color.text.secondary,
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: spacing.s16,
+  },
+  modalContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: spacing.s16,
+    borderRadius: border.radius.md,
+  },
+  modalMessage: {
+    fontSize: font.body.lg,
+    marginBottom: spacing.s16,
+    textAlign: "center",
+  },
+  modalButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  modalButton: {
+    width: 100,
+    marginHorizontal: spacing.s8,
   },
 });
