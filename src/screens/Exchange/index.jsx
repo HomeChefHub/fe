@@ -4,15 +4,17 @@ import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomRowCard } from "../../components/CustomRowCard";
 import { CustomAddButton } from "../../components/CustomAddButton";
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import { handleDateFormat } from "../../services/handleDateFormat";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 export default function ExchangeScreen({ navigation }) {
   const [exchangeList, setExchangeList] = useState([]);
   const [lastExchangeId, setLastExchangeId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
+  const isFocused = useIsFocused();
 
   const fetchExchangeList = async () => {
     if (isLoading || isLastPage) return;
@@ -37,9 +39,11 @@ export default function ExchangeScreen({ navigation }) {
     }
   };
 
-  useEffect(() => {
-    fetchExchangeList();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchExchangeList();
+    }, [isFocused]),
+  );
 
   return (
     <View style={globalStyles.container}>
@@ -57,7 +61,9 @@ export default function ExchangeScreen({ navigation }) {
             date={handleDateFormat(item.createDate)}
             status={item.status}
             onPress={() =>
-              navigation.navigate("ExchangeDetail", { id: item.exchangeId })
+              navigation.navigate("ExchangeDetail", {
+                exchangeId: item.exchangeId,
+              })
             }
           />
         )}
