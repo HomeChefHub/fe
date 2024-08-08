@@ -1,19 +1,13 @@
-import {
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { globalStyles } from "../../constants/global";
 import { color, font, spacing } from "../../constants/constants";
 import { RecipeCard } from "./_components/RecipeCard";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function RecommendedRecipesScreen() {
   const [favoriteRecipeList, setFavoriteRecipeList] = useState([]);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [count, setCount] = useState(0);
   const memberId = 1;
 
@@ -29,23 +23,14 @@ export default function RecommendedRecipesScreen() {
     }
   };
 
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    await fetchFavoriteRecipes();
-    setIsRefreshing(false);
-  };
-
-  useEffect(() => {
-    fetchFavoriteRecipes();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchFavoriteRecipes();
+    }, []),
+  );
 
   return (
-    <ScrollView
-      style={globalStyles.container}
-      refreshControl={
-        <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
-      }
-    >
+    <ScrollView style={globalStyles.container}>
       <Text style={styles.countText}>총 {count}개</Text>
       <View>
         {favoriteRecipeList.map((recipe) => (
