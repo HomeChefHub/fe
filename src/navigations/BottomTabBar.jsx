@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import FridgeScreen from "../screens/Fridge";
 import ChatScreen from "../screens/Chat";
 import MyPageScreen from "../screens/MyPage";
 import { color } from "../constants/constants";
@@ -7,6 +6,7 @@ import { SvgXml } from "react-native-svg";
 import { svg } from "../assets/svg";
 import ExchangeStackNavigator from "./ExchangeStackNavigator";
 import HomeStackNavigator from "./HomeStackNavigator";
+import FridgeStackNavigator from "./FridgeStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +22,7 @@ export default function BottomTabBar() {
     >
       <Tab.Screen
         name="내 냉장고"
-        component={FridgeScreen}
+        component={FridgeStackNavigator}
         options={{
           tabBarLabel: "내 냉장고",
           tabBarIcon: ({ color, size }) => (

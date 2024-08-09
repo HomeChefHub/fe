@@ -3,57 +3,49 @@ import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 
-import fridgeSample from "../../assets/fridge.png";
 import { CustomAddButton } from "../../components/CustomAddButton";
 import { CustomRowCard } from "../../components/CustomRowCard";
-
-const fridges = [
-  {
-    id: "1",
-    uri: fridgeSample,
-    title: "달걀 1",
-    date: "2024.07.03 ~ 2024.07.25",
-  },
-  {
-    id: "2",
-    uri: fridgeSample,
-    title: "달걀 2",
-    date: "2024.07.03 ~ 2024.07.25.",
-  },
-  {
-    id: "3",
-    uri: fridgeSample,
-    title: "달걀 3",
-    date: "2024.07.03 ~ 2024.07.25.",
-  },
-  {
-    id: "4",
-    uri: fridgeSample,
-    title: "달걀 4",
-    date: "2024.07.03 ~ 2024.07.25.",
-  },
-  {
-    id: "5",
-    uri: fridgeSample,
-    title: "달걀 5",
-    date: "2024.07.03 ~ 2024.07.25.",
-  },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function FridgeScreen() {
+  const [fridgeList, setFridgeList] = useState([]);
+  const id = 1;
+  const navigation = useNavigation();
+
+  const fetchFridgeList = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/api/v1/refrigerator/members/${id}`,
+      );
+      setFridgeList(res.data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFridgeList();
+  }, []);
+
   return (
     <View style={globalStyles.container}>
       <CustomHeader title={"내 냉장고"} />
       <CustomSearchInput placeholder={"찾으시는 재료가 있나요?"} />
       <FlatList
-        data={fridges}
+        data={fridgeList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <CustomRowCard uri={item.uri} title={item.title} date={item.date} />
+          <CustomRowCard uri={item.uri} title={item.name} date="333333" />
         )}
       />
       <View>
-        <CustomAddButton text={"+ 추가"} width={87} />
+        <CustomAddButton
+          text={"+ 추가"}
+          width={87}
+          onPress={() => navigation.navigate("FridgeRegister")}
+        />
       </View>
     </View>
   );
