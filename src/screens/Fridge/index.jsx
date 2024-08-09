@@ -6,8 +6,9 @@ import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomAddButton } from "../../components/CustomAddButton";
 import { CustomRowCard } from "../../components/CustomRowCard";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { handleDateFormat } from "../../services/handleDateFormat";
 
 export default function FridgeScreen() {
   const [fridgeList, setFridgeList] = useState([]);
@@ -19,15 +20,17 @@ export default function FridgeScreen() {
       const res = await axios.get(
         `http://localhost:8080/api/v1/refrigerator/members/${id}`,
       );
-      setFridgeList(res.data.content);
+      setFridgeList(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    fetchFridgeList();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchFridgeList();
+    }, []),
+  );
 
   return (
     <View style={globalStyles.container}>
@@ -37,7 +40,11 @@ export default function FridgeScreen() {
         data={fridgeList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <CustomRowCard uri={item.uri} title={item.name} date="333333" />
+          <CustomRowCard
+            uri={item.uri}
+            title={item.name}
+            date={`${handleDateFormat(item.startDate).substring(0, 10)} ~ ${handleDateFormat(item.endDate).substring(0, 10)}`}
+          />
         )}
       />
       <View>
