@@ -4,7 +4,7 @@ import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomRowCard } from "../../components/CustomRowCard";
 import { CustomAddButton } from "../../components/CustomAddButton";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import { handleDateFormat } from "../../services/handleDateFormat";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
@@ -39,10 +39,14 @@ export default function ExchangeScreen({ navigation }) {
     }
   };
 
+  useEffect(() => {
+    fetchExchangeList();
+  }, [isFocused]);
+
   useFocusEffect(
     useCallback(() => {
       fetchExchangeList();
-    }, [isFocused]),
+    }, []),
   );
 
   return (
@@ -59,7 +63,7 @@ export default function ExchangeScreen({ navigation }) {
             title={item.title}
             location={item.region + " " + item.childRegion}
             date={handleDateFormat(item.createDate)}
-            status={item.status}
+            isTraded={item.status === "TRADED"}
             onPress={() =>
               navigation.navigate("ExchangeDetail", {
                 exchangeId: item.exchangeId,

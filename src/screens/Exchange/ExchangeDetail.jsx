@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, Alert } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
 import { border, color, font, spacing } from "../../constants/constants";
@@ -18,7 +18,7 @@ export default function ExchangeDetailScreen({ route }) {
   const [exchangeDetail, setExchangeDetail] = useState({});
   const [isModal, setIsModal] = useState(false);
 
-  const fetchRecipeDetail = async () => {
+  const fetchExchangeDetail = async () => {
     try {
       const res = await axios.get(
         `http://localhost:8080/api/v1/exchanges/${exchangeId}`,
@@ -30,14 +30,14 @@ export default function ExchangeDetailScreen({ route }) {
   };
 
   useEffect(() => {
-    fetchRecipeDetail();
+    fetchExchangeDetail();
   }, []);
 
   const { title, content, region, childRegion, status, createDate, memberId } =
     exchangeDetail;
 
   const handleEditButton = () => {
-    navigation.navigate("EditExchangeScreen", { exchangeId });
+    navigation.navigate("ExchangeEdit", { exchangeId, exchangeDetail });
   };
 
   const handleDeleteButton = () => {

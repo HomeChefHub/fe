@@ -9,7 +9,7 @@ export const CustomRowCard = ({
   title,
   location,
   date,
-  status,
+  isTraded,
   onPress,
 }) => {
   return (
@@ -22,7 +22,7 @@ export const CustomRowCard = ({
             {location && <Text style={styles.date}>{location}</Text>}
             <Text style={styles.date}>{date}</Text>
           </View>
-          {status && <CustomStatusLabel status={status} />}
+          {isTraded && <CustomStatusLabel />}
         </View>
       </TouchableOpacity>
     </DropShadow>

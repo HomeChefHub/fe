@@ -6,6 +6,8 @@ export default function CustomTextField({
   title,
   fieldHeight,
   placeHolder,
+  value,
+  onChangeText,
   multiline = false,
 }) {
   return (
@@ -15,7 +17,9 @@ export default function CustomTextField({
         style={[styles.inputBox, { height: fieldHeight }]}
         placeholder={placeHolder}
         placeholderTextColor={color.text.secondary}
+        value={value}
         multiline={multiline}
+        onChangeText={onChangeText}
       />
     </View>
   );
