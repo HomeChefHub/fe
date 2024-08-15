@@ -8,7 +8,7 @@ import axios from "axios";
 export default function FridgeRegisterScreen({ navigation }) {
   const handleSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:8080/api/v1/refrigerator", data);
+      await axios.post(`${process.env.API_URL}/refrigerator`, data);
       console.log(data);
       navigation.goBack();
     } catch (error) {

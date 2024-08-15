@@ -8,8 +8,7 @@ import axios from "axios";
 export default function ExchangeRegisterScreen({ navigation }) {
   const handleSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:8080/api/v1/exchanges", data);
-      console.log(data);
+      await axios.post(`${process.env.API_URL}/exchanges`, data);
       navigation.goBack();
     } catch (error) {
       console.log(error);

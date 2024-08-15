@@ -26,9 +26,7 @@ export default function FridgeScreen() {
 
   const fetchFridgeList = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:8080/api/v1/refrigerator/members/${id}`,
-      );
+      const res = await axios.get(`${process.env.API_URL}/members/${id}`);
       setFridgeList(res.data);
     } catch (error) {
       console.log(error);
@@ -43,14 +41,11 @@ export default function FridgeScreen() {
 
   const handleDelete = async (itemId) => {
     try {
-      await axios.delete(
-        `http://localhost:8080/api/v1/refrigerator/${itemId}`,
-        {
-          data: {
-            requestMemberId: id,
-          },
+      await axios.delete(`${process.env.API_URL}/refrigerator/${itemId}`, {
+        data: {
+          requestMemberId: id,
         },
-      );
+      });
       fetchFridgeList();
     } catch (error) {
       console.log(error.response ? error.response.data : error.message);
@@ -77,7 +72,15 @@ export default function FridgeScreen() {
         </View>
         {selectedItemId === item.id && (
           <View style={styles.optionContainer}>
-            <TouchableOpacity style={styles.optionButton} onPress={() => {}}>
+            <TouchableOpacity
+              style={styles.optionButton}
+              onPress={() =>
+                navigation.navigate("FridgeEdit", {
+                  item: item,
+                  memberId: id,
+                })
+              }
+            >
               <Text style={styles.optionText}>수정</Text>
             </TouchableOpacity>
             <TouchableOpacity

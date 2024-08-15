@@ -22,7 +22,7 @@ export default function ExchangeScreen({ navigation }) {
 
     try {
       const params = lastExchangeId ? { lastExchangeId } : {};
-      const res = await axios.get("http://localhost:8080/api/v1/exchanges", {
+      const res = await axios.get(`${process.env.API_URL}/exchanges`, {
         params,
       });
       setExchangeList([...exchangeList, ...res.data.content]);

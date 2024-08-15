@@ -12,7 +12,7 @@ export default function RecommendedRecipesScreen() {
 
   const fetchRecipes = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/v1/recipes", {
+      const res = await axios.get(`${process.env.API_URL}/recipes`, {
         params: { page: 0, size: 10 },
       });
       setRecipeList(res.data.content);

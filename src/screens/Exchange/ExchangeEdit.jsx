@@ -12,10 +12,7 @@ export default function ExchangeEditScreen({ route }) {
 
   const handleSubmit = async (data) => {
     try {
-      await axios.patch(
-        `http://localhost:8080/api/v1/exchanges/${exchangeId}`,
-        data,
-      );
+      await axios.patch(`${process.env.API_URL}/exchanges/${exchangeId}`, data);
       navigation.goBack();
     } catch (error) {
       console.log(error);

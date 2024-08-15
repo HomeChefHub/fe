@@ -21,7 +21,7 @@ export default function ExchangeDetailScreen({ route }) {
   const fetchExchangeDetail = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/v1/exchanges/${exchangeId}`,
+        `${process.env.API_URL}/exchanges/${exchangeId}`,
       );
       setExchangeDetail(res.data);
     } catch (error) {
@@ -46,9 +46,7 @@ export default function ExchangeDetailScreen({ route }) {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:8080/api/v1/exchanges/${exchangeId}`,
-      );
+      await axios.delete(`${process.env.API_URL}/exchanges/${exchangeId}`);
       setIsModal(false);
       navigation.goBack();
     } catch (error) {

@@ -24,9 +24,7 @@ export function ExchangeForm({
 
   const fetchRegion = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/v1/exchanges/regions",
-      );
+      const res = await axios.get(`${process.env.API_URL}/exchanges/regions`);
       setRegions(
         res.data.map((region) => ({
           label: region.name,

@@ -22,7 +22,7 @@ export default function RecipeDetailScreen({ route }) {
 
   const fetchRecipeDetail = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/v1/recipes/${id}`);
+      const res = await axios.get(`${process.env.API_URL}/recipes/${id}`);
       setRecipeList(res.data);
       checkIsFavorite(res.data.content);
     } catch (error) {
@@ -33,7 +33,7 @@ export default function RecipeDetailScreen({ route }) {
   const fetchFavorites = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/v1/recipes/members/${memberId}/favorites?size=5`,
+        `${Config.API_URL}/recipes/members/${memberId}/favorites?size=5`,
       );
       return res.data.content;
     } catch (error) {
@@ -50,7 +50,7 @@ export default function RecipeDetailScreen({ route }) {
   const handleFavorites = async () => {
     try {
       await axios.post(
-        `http://localhost:8080/api/v1/recipes/toggle-favorite/${memberId}/${id}`,
+        `${process.env.API_URL}/recipes/toggle-favorite/${memberId}/${id}`,
       );
       setIsFavorite(!isFavorite);
     } catch (error) {
