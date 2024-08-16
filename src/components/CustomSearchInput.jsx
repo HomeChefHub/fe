@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg";
 import { svg } from "../assets/svg";
 import { border, color, spacing } from "../constants/constants";
 
-export const CustomSearchInput = ({ placeholder }) => {
+export const CustomSearchInput = ({ placeholder, onChangeText }) => {
   return (
     <View style={styles.container}>
       <SvgXml
@@ -19,6 +19,7 @@ export const CustomSearchInput = ({ placeholder }) => {
           placeholder={placeholder}
           style={styles.input}
           placeholderTextColor={color.text.primary}
+          onChangeText={onChangeText}
         />
       </View>
     </View>
