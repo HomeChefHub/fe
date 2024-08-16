@@ -1,6 +1,36 @@
 import React from "react";
 import { View } from "react-native";
+import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
+import { globalStyles } from "../../constants/global";
+import { FridgeForm } from "./_components/FridgeForm";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
+import { format } from "date-fns";
 
-export default function FridgeEditScreen() {
-  return <View></View>;
+export default function FridgeEditScreen({ route }) {
+  const { item, memberId } = route.params;
+  const navigation = useNavigation();
+
+  const handleSubmit = async (data) => {
+    try {
+      await axios.patch(`${process.env.API_URL}/refrigerator/${item.id}`, data);
+      navigation.goBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <View style={globalStyles.container}>
+      <CustomGoBackHeader text={"게시물 수정"} />
+      <FridgeForm
+        id={memberId}
+        title={item.name}
+        startDate={format(item.startDate, "yyyy-MM-dd'T'HH:mm:ss")}
+        endDate={format(item.endDate, "yyyy-MM-dd'T'HH:mm:ss")}
+        onSubmit={handleSubmit}
+        isEdit={true}
+      />
+    </View>
+  );
 }

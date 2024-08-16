@@ -10,9 +10,10 @@ import { format } from "date-fns";
 export function FridgeForm({
   id = null,
   title = "",
-  startDate = new Date(),
-  endDate = new Date(),
+  startDate = null,
+  endDate = null,
   onSubmit,
+  isEdit = false,
 }) {
   const [selectedTitle, setSelectedTitle] = useState(title);
   const [selectedStartDate, setSelectedStartDate] = useState(startDate);
@@ -71,6 +72,8 @@ export function FridgeForm({
           ]}
           previousTitle="이전"
           nextTitle="다음"
+          selectedStartDate={selectedStartDate}
+          selectedEndDate={selectedEndDate}
         />
       </View>
 

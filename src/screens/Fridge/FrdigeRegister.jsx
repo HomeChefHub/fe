@@ -2,14 +2,13 @@ import React from "react";
 import { View } from "react-native";
 import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
 import { globalStyles } from "../../constants/global";
-import { FridgeForm } from "./_components/FridgeForm"; // Import the new component
+import { FridgeForm } from "./_components/FridgeForm";
 import axios from "axios";
 
 export default function FridgeRegisterScreen({ navigation }) {
   const handleSubmit = async (data) => {
     try {
       await axios.post(`${process.env.API_URL}/refrigerator`, data);
-      console.log(data);
       navigation.goBack();
     } catch (error) {
       console.log(error);

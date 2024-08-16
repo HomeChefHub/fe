@@ -55,7 +55,7 @@ export default function ExchangeScreen({ navigation }) {
       <CustomSearchInput placeholder={"찾으시는 재료가 있나요?"} />
       <FlatList
         data={exchangeList}
-        keyExtractor={(item) => item.exchangeId.toString()}
+        keyExtractor={(item) => item.exchangeId}
         renderItem={({ item }) => (
           <CustomRowCard
             id={item.exchangeId}
