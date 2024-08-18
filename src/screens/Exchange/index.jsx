@@ -59,11 +59,11 @@ export default function ExchangeScreen({ navigation }) {
         renderItem={({ item }) => (
           <CustomRowCard
             id={item.exchangeId}
-            uri={item.uri}
             title={item.title}
             location={item.region + " " + item.childRegion}
             date={handleDateFormat(item.createDate)}
             isTraded={item.status === "TRADED"}
+            imageUrl={item.thumbnailUrl}
             onPress={() =>
               navigation.navigate("ExchangeDetail", {
                 exchangeId: item.exchangeId,

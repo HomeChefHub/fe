@@ -5,19 +5,26 @@ import { border, color, font, shadow, spacing } from "../constants/constants";
 import { CustomStatusLabel } from "./CustomStatusLabel";
 
 export const CustomRowCard = ({
-  uri,
   title,
   location,
   date,
   isTraded,
+  imageUrl,
   onPress,
 }) => {
   return (
     <DropShadow style={shadow}>
       <TouchableOpacity style={styles.container} onPress={onPress}>
-        {uri && <Image source={{ uri }} style={styles.image} />}
+        <Image
+          source={
+            imageUrl ? { uri: imageUrl } : require("../assets/no_image.png")
+          }
+          style={styles.image}
+        />
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+            {title}
+          </Text>
           <View style={styles.descriptionContainer}>
             {location && <Text style={styles.date}>{location}</Text>}
             <Text style={styles.date}>{date}</Text>
@@ -39,8 +46,8 @@ const styles = StyleSheet.create({
     marginBottom: spacing.s16,
   },
   image: {
-    width: 130,
-    height: "100%",
+    width: 120,
+    height: 100,
     borderTopLeftRadius: border.radius.md,
     borderBottomLeftRadius: border.radius.md,
   },
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.s4,
   },
   date: {
-    fontSize: font.body.md,
+    fontSize: font.body.sm,
     color: color.text.secondary,
     marginRight: spacing.s8,
   },
