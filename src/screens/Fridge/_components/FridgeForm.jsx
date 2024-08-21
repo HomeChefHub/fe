@@ -13,7 +13,6 @@ export function FridgeForm({
   startDate = null,
   endDate = null,
   onSubmit,
-  isEdit = false,
 }) {
   const [selectedTitle, setSelectedTitle] = useState(title);
   const [selectedStartDate, setSelectedStartDate] = useState(startDate);
@@ -24,7 +23,9 @@ export function FridgeForm({
       setSelectedStartDate(format(date, "yyyy-MM-dd'T'HH:mm:ss"));
       setSelectedEndDate(null);
     } else if (type === "END_DATE") {
-      setSelectedEndDate(format(date, "yyyy-MM-dd'T'HH:mm:ss"));
+      if (selectedStartDate && date >= selectedStartDate) {
+        setSelectedEndDate(format(date, "yyyy-MM-dd'T'HH:mm:ss"));
+      }
     }
   };
 
