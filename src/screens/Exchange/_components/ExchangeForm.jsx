@@ -3,10 +3,10 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import CustomTextField from "../../../components/CustomTextField";
 import { CustomButton } from "../../../components/CustomButton";
 import { color, font, spacing } from "../../../constants/constants";
-import CustomImageUploadField from "../../../components/CustomImageUploadField";
 import CustomDropDown from "../../../components/CustomDropDown";
 import axios from "axios";
 import { CheckBox } from "react-native-btr";
+import CustomImageUploadField from "../../../components/CustomImageUploadField";
 
 export function ExchangeForm({
   title = "",
@@ -21,6 +21,7 @@ export function ExchangeForm({
   const [selectedTitle, setSelectedTitle] = useState(title);
   const [selectedContent, setSelectedContent] = useState(content);
   const [selectedIsTraded, setSelectedIsTraded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null); // 이미지 URI 상태 추가
 
   const fetchRegion = async () => {
     try {
@@ -41,15 +42,6 @@ export function ExchangeForm({
     fetchRegion();
   }, []);
 
-  const handleSubmit = () => {
-    onSubmit({
-      title: selectedTitle,
-      content: selectedContent,
-      regionId: selectedChildRegion,
-      ...(isEdit && { status: selectedIsTraded && "TRADED" }),
-    });
-  };
-
   const handleRegionChange = (selected) => {
     setSelectedRegion(selected);
 
@@ -66,9 +58,18 @@ export function ExchangeForm({
     setSelectedChildRegion(selected);
   };
 
+  const handleSubmit = async () => {
+    onSubmit({
+      title: selectedTitle,
+      content: selectedContent,
+      regionId: selectedChildRegion,
+      ...(isEdit && { status: selectedIsTraded && "TRADED" }),
+    });
+  };
+
   return (
     <ScrollView>
-      <CustomImageUploadField />
+      <CustomImageUploadField onImageSelect={setSelectedImage} />
       <CustomTextField
         title={"제목"}
         fieldHeight={40}
