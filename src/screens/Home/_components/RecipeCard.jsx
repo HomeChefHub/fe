@@ -10,14 +10,14 @@ import {
 import DropShadow from "react-native-drop-shadow";
 import { useNavigation } from "@react-navigation/native";
 
-export const RecipeCard = ({ id, img, name }) => {
+export const RecipeCard = ({ recipeId, img, name }) => {
   const navigation = useNavigation();
 
   return (
     <DropShadow style={shadow}>
       <TouchableOpacity
         style={styles.container}
-        onPress={() => navigation.navigate("RecipeDetail", { id })}
+        onPress={() => navigation.navigate("RecipeDetail", { recipeId })}
       >
         <Image source={{ uri: img }} style={styles.image} />
         <View style={styles.textContainer}>
