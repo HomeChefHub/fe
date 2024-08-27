@@ -1,66 +1,75 @@
-import { FlatList, View } from "react-native";
+import React, { useState, useCallback } from "react";
+import { FlatList, Text, View } from "react-native";
+import axios from "axios";
+import { useFocusEffect } from "@react-navigation/native";
 import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomRowCard } from "../../components/CustomRowCard";
 import { CustomAddButton } from "../../components/CustomAddButton";
-import { useState, useCallback, useEffect } from "react";
-import axios from "axios";
 import { handleDateFormat } from "../../services/handleDateFormat";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 export default function ExchangeScreen({ navigation }) {
+  const api_url = process.env.API_URL;
   const [exchangeList, setExchangeList] = useState([]);
-  const [lastExchangeId, setLastExchangeId] = useState("");
+  const [keyword, setKeyword] = useState(null);
+  const [lastExchangeId, setLastExchangeId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLastPage, setIsLastPage] = useState(false);
-  const isFocused = useIsFocused();
 
-  const fetchExchangeList = async () => {
-    if (isLoading || isLastPage) return;
+  const fetchExchangeList = async (reset = false) => {
+    if (isLoading) return;
     setIsLoading(true);
 
     try {
-      const params = lastExchangeId ? { lastExchangeId } : {};
-      const res = await axios.get(`${process.env.API_URL}/exchanges`, {
-        params,
-      });
-      setExchangeList([...exchangeList, ...res.data.content]);
-      if (res.data.content.length) {
+      const params = { keyword };
+      if (lastExchangeId && !reset) {
+        params.lastExchangeId = lastExchangeId;
+      }
+
+      const res = await axios.get(`${api_url}/exchanges`, { params });
+
+      const newExchangeList = res.data.content;
+
+      if (reset) {
+        setExchangeList(newExchangeList);
+      } else {
+        setExchangeList((prevList) => [...prevList, ...newExchangeList]);
+      }
+      if (newExchangeList.length > 0) {
         setLastExchangeId(
-          res.data.content[res.data.content.length - 1].exchangeId,
+          newExchangeList[newExchangeList.length - 1].exchangeId,
         );
       }
-      setIsLastPage(res.data.last);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchExchangeList();
-  }, [isFocused]);
-
   useFocusEffect(
     useCallback(() => {
-      fetchExchangeList();
-    }, []),
+      setLastExchangeId(null);
+      fetchExchangeList(true);
+    }, [keyword]),
   );
 
   return (
     <View style={globalStyles.container}>
       <CustomHeader title={"식재료 교환 게시판"} />
-      <CustomSearchInput placeholder={"찾으시는 재료가 있나요?"} />
+      <CustomSearchInput
+        placeholder={"찾으시는 재료가 있나요?"}
+        onChangeText={(text) => {
+          setKeyword(text);
+        }}
+      />
       <FlatList
         data={exchangeList}
-        keyExtractor={(item) => item.exchangeId}
         renderItem={({ item }) => (
           <CustomRowCard
             id={item.exchangeId}
             title={item.title}
-            location={item.region + " " + item.childRegion}
+            location={`${item.region} ${item.childRegion}`}
             date={handleDateFormat(item.createDate)}
             isTraded={item.status === "TRADED"}
             imageUrl={item.thumbnailUrl}
@@ -71,8 +80,10 @@ export default function ExchangeScreen({ navigation }) {
             }
           />
         )}
-        onEndReached={fetchExchangeList}
-        onEndReachedThreshold={0.1}
+        keyExtractor={(item) => item.exchangeId}
+        onEndReached={() => fetchExchangeList(false)} // false를 명시적으로 전달
+        onEndReachedThreshold={0.5}
+        ListEmptyComponent={<Text>교환 게시물이 없습니다.</Text>}
       />
       <View>
         <CustomAddButton
