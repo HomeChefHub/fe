@@ -46,7 +46,7 @@ export default function HomeScreen() {
     <View style={globalStyles.container}>
       <CustomHeader title={"Refooding"} />
       <CustomSearchInput
-        placeholder={"요리명 또는 재료로 레시피를 검색해보세요!"}
+        placeholder={"재료로 레시피를 검색해보세요!"}
         onChangeText={setSearchKeyword}
       />
       {!searchKeyword ? (

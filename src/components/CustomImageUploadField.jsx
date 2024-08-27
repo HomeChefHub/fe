@@ -12,7 +12,6 @@ export default function CustomImageUploadField({ onImageSelect }) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaType: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      quality: 1,
     });
 
     if (!result.canceled && result.assets.length > 0) {
@@ -57,6 +56,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: border.radius.md,
-    resizeMode: "cover", // 이미지가 박스를 넘어가지 않도록 설정
+    resizeMode: "cover",
   },
 });

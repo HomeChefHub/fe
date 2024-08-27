@@ -21,7 +21,7 @@ export function ExchangeForm({
   const [selectedTitle, setSelectedTitle] = useState(title);
   const [selectedContent, setSelectedContent] = useState(content);
   const [selectedIsTraded, setSelectedIsTraded] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null); // 이미지 URI 상태 추가
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const fetchRegion = async () => {
     try {
@@ -59,12 +59,23 @@ export function ExchangeForm({
   };
 
   const handleSubmit = async () => {
-    onSubmit({
-      title: selectedTitle,
-      content: selectedContent,
-      regionId: selectedChildRegion,
-      ...(isEdit && { status: selectedIsTraded && "TRADED" }),
-    });
+    const formData = new FormData();
+    formData.append("title", selectedTitle);
+    formData.append("content", selectedContent);
+    formData.append("regionId", selectedChildRegion);
+
+    if (selectedImage) {
+      formData.append("exchangeImageFiles", {
+        uri: selectedImage.uri,
+        name: selectedImage.filename || "image.jpg",
+        type: selectedImage.mimeType || "image/jpeg",
+      });
+    }
+
+    if (isEdit) {
+      formData.append("status", selectedIsTraded ? "TRADED" : "ACTIVE");
+    }
+    onSubmit(formData);
   };
 
   return (
