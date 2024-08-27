@@ -6,9 +6,15 @@ import { ExchangeForm } from "./_components/ExchangeForm"; // Import the new com
 import axios from "axios";
 
 export default function ExchangeRegisterScreen({ navigation }) {
-  const handleSubmit = async (data) => {
+  const api_url = process.env.API_URL;
+
+  const handleSubmit = async (formData) => {
     try {
-      await axios.post(`${process.env.API_URL}/exchanges`, data);
+      await axios.post(`${api_url}/exchanges`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigation.goBack();
     } catch (error) {
       console.log(error);
