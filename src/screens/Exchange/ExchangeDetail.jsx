@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import Modal from "react-native-modal";
 
 export default function ExchangeDetailScreen({ route }) {
+  const api_url = process.env.API_URL;
   const { exchangeId } = route.params;
   const navigation = useNavigation();
   const id = 1;
@@ -20,9 +21,7 @@ export default function ExchangeDetailScreen({ route }) {
 
   const fetchExchangeDetail = async () => {
     try {
-      const res = await axios.get(
-        `${process.env.API_URL}/exchanges/${exchangeId}`,
-      );
+      const res = await axios.get(`${api_url}/exchanges/${exchangeId}`);
       setExchangeDetail(res.data);
     } catch (error) {
       console.log(error);
@@ -33,20 +32,29 @@ export default function ExchangeDetailScreen({ route }) {
     fetchExchangeDetail();
   }, []);
 
-  const { title, content, region, childRegion, status, createDate, memberId } =
-    exchangeDetail;
+  const {
+    title,
+    content,
+    memberId,
+    username,
+    region,
+    childRegion,
+    status,
+    createDate,
+    imageUrls,
+  } = exchangeDetail;
 
   const handleEditButton = () => {
     navigation.navigate("ExchangeEdit", { exchangeId, exchangeDetail });
   };
 
   const handleDeleteButton = () => {
-    setIsModal(true); // Show the custom modal
+    setIsModal(true);
   };
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`${process.env.API_URL}/exchanges/${exchangeId}`);
+      await axios.delete(`${api_url}/exchanges/${exchangeId}`);
       setIsModal(false);
       navigation.goBack();
     } catch (error) {
@@ -60,15 +68,17 @@ export default function ExchangeDetailScreen({ route }) {
 
   return (
     <ScrollView style={globalStyles.container}>
-      <CustomGoBackHeader
-        text={status === "ACTIVE" ? "예약 중" : "거래 완료"}
-      />
-      <Image style={styles.image} />
+      <CustomGoBackHeader text={status === "ACTIVE" ? "" : "거래 완료"} />
+      {imageUrls && imageUrls.length > 0 && (
+        <View style={styles.imgContainer}>
+          <Image style={styles.image} source={{ uri: imageUrls[0] }} />
+        </View>
+      )}
       <View style={styles.profileContainer}>
         <View style={styles.profileInfo}>
           <CustomProfileImage />
           <View>
-            <Text style={{ fontSize: font.title.md }}>닉네임</Text>
+            <Text style={{ fontSize: font.title.md }}>{username}</Text>
             <Text style={styles.regionText}>{region + " " + childRegion}</Text>
           </View>
         </View>
@@ -129,12 +139,20 @@ export default function ExchangeDetailScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    height: 250,
-    borderWidth: 1,
+  imgContainer: {
+    height: 220,
     borderColor: color.border.primary,
     borderRadius: border.radius.md,
-    marginBottom: spacing.s16,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: spacing.s20,
+    position: "relative",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: border.radius.md,
   },
   profileContainer: {
     display: "flex",
@@ -168,7 +186,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
-    marginTop: spacing.s16,
+    marginVertical: spacing.s16,
   },
   modalContainer: {
     display: "flex",
