@@ -6,9 +6,15 @@ import { FridgeForm } from "./_components/FridgeForm";
 import axios from "axios";
 
 export default function FridgeRegisterScreen({ navigation }) {
-  const handleSubmit = async (data) => {
+  const api_url = process.env.API_URL;
+
+  const handleSubmit = async (params) => {
     try {
-      await axios.post(`${process.env.API_URL}/refrigerator`, data);
+      await axios.post(`${api_url}/ingredients`, params, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigation.goBack();
     } catch (error) {
       console.log(error);
@@ -18,7 +24,7 @@ export default function FridgeRegisterScreen({ navigation }) {
   return (
     <View style={globalStyles.container}>
       <CustomGoBackHeader text={"재료 추가"} />
-      <FridgeForm id={1} onSubmit={handleSubmit} />
+      <FridgeForm onSubmit={handleSubmit} />
     </View>
   );
 }

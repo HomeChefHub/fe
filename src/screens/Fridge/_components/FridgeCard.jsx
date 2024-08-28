@@ -4,19 +4,19 @@ import { SvgXml } from "react-native-svg";
 import { svg } from "../../../assets/svg";
 import { font, spacing } from "../../../constants/constants";
 import { useState } from "react";
-import { handleDateFormat } from "../../../services/handleDateFormat";
 import { useNavigation } from "@react-navigation/native";
+import { format } from "date-fns";
 
-export function FridgeCard({ item, memberId, onDelete }) {
+export function FridgeCard({ item, onDelete }) {
   const [isOption, setIsOption] = useState(false);
   const navigation = useNavigation();
 
   return (
     <View style={styles.itemContainer}>
       <CustomRowCard
-        uri={item.uri}
         title={item.name}
-        date={`${handleDateFormat(item.startDate).substring(0, 10)} ~ ${handleDateFormat(item.endDate).substring(0, 10)}`}
+        imageUrl={item.thumbnailUrl}
+        date={format(item.expirationDate, "yyyy-MM-dd")}
       />
       <TouchableOpacity
         style={styles.threeDotsContainer}
@@ -30,8 +30,7 @@ export function FridgeCard({ item, memberId, onDelete }) {
             style={styles.optionButton}
             onPress={() =>
               navigation.navigate("FridgeEdit", {
-                item: item,
-                memberId: memberId,
+                ingredientId: item.id,
               })
             }
           >

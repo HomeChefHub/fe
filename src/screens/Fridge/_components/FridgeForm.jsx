@@ -7,55 +7,48 @@ import CustomImageUploadField from "../../../components/CustomImageUploadField";
 import CalendarPicker from "react-native-calendar-picker";
 import { format } from "date-fns";
 
-export function FridgeForm({
-  id = null,
-  title = "",
-  startDate = null,
-  endDate = null,
-  onSubmit,
-}) {
-  const [selectedTitle, setSelectedTitle] = useState(title);
-  const [selectedStartDate, setSelectedStartDate] = useState(startDate);
-  const [selectedEndDate, setSelectedEndDate] = useState(endDate);
-
-  const handleDateChange = (date, type) => {
-    if (type === "START_DATE") {
-      setSelectedStartDate(format(date, "yyyy-MM-dd'T'HH:mm:ss"));
-      setSelectedEndDate(null);
-    } else if (type === "END_DATE") {
-      if (selectedStartDate && date >= selectedStartDate) {
-        setSelectedEndDate(format(date, "yyyy-MM-dd'T'HH:mm:ss"));
-      }
-    }
-  };
+export function FridgeForm({ name = "", expirationDate = null, onSubmit }) {
+  const [selectedName, setSelectedName] = useState(name);
+  const [selectedExpirationDate, setSelectedExpirationDate] =
+    useState(expirationDate);
+  const [selectedIngredientImages, setSelectedIngredientImages] = useState([]);
 
   const handleSubmit = () => {
-    onSubmit({
-      memberId: id,
-      name: selectedTitle,
-      startDate: selectedStartDate,
-      endDate: selectedEndDate,
-    });
+    const formData = new FormData();
+    formData.append("name", selectedName);
+    formData.append(
+      "expirationDate",
+      format(selectedExpirationDate, "yyyy-MM-dd'T'HH:mm:ss"),
+    );
+
+    if (selectedIngredientImages.length > 0) {
+      formData.append("ingredientImages", {
+        uri: selectedIngredientImages.uri,
+        name: selectedIngredientImages.filename || "image.jpg",
+        type: selectedIngredientImages.mimeType || "image/jpeg",
+      });
+    }
+
+    onSubmit(formData);
   };
 
   return (
     <ScrollView>
-      <CustomImageUploadField />
+      <CustomImageUploadField onImageSelect={setSelectedIngredientImages} />
       <CustomTextField
         title={"음식 이름을 입력해 주세요."}
         fieldHeight={40}
         placeHolder={"음식 이름"}
-        value={selectedTitle}
-        onChangeText={setSelectedTitle}
+        value={selectedName}
+        onChangeText={setSelectedName}
       />
       <View>
         <Text style={styles.dateTitle}>유통기한을 지정해 주세요</Text>
         <CalendarPicker
-          allowRangeSelection={true}
           todayBackgroundColor={color.brand.primary}
           selectedDayColor={color.brand.secondary}
           selectedDayTextColor={color.text.inverse}
-          onDateChange={(date, type) => handleDateChange(date, type)}
+          onDateChange={(date) => setSelectedExpirationDate(date)}
           weekdays={["일", "월", "화", "수", "목", "금", "토"]}
           months={[
             "1월",
@@ -73,8 +66,7 @@ export function FridgeForm({
           ]}
           previousTitle="이전"
           nextTitle="다음"
-          selectedStartDate={selectedStartDate}
-          selectedEndDate={selectedEndDate}
+          selectedStartDate={selectedExpirationDate}
         />
       </View>
 
