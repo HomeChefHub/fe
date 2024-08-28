@@ -7,7 +7,7 @@ import { CustomHeader } from "../../components/CustomHeader";
 import { CustomSearchInput } from "../../components/CustomSearchInput";
 import { CustomRowCard } from "../../components/CustomRowCard";
 import { CustomAddButton } from "../../components/CustomAddButton";
-import { handleDateFormat } from "../../services/handleDateFormat";
+import { format } from "date-fns";
 
 export default function ExchangeScreen({ navigation }) {
   const api_url = process.env.API_URL;
@@ -70,7 +70,7 @@ export default function ExchangeScreen({ navigation }) {
             id={item.exchangeId}
             title={item.title}
             location={`${item.region} ${item.childRegion}`}
-            date={handleDateFormat(item.createDate)}
+            date={format(item.createDate, "yyyy-MM-dd'T'HH:mm")}
             isTraded={item.status === "TRADED"}
             imageUrl={item.thumbnailUrl}
             onPress={() =>

@@ -7,12 +7,13 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
 export default function ExchangeEditScreen({ route }) {
+  const api_url = process.env.API_URL;
   const { exchangeId, exchangeDetail } = route.params;
   const navigation = useNavigation();
 
   const handleSubmit = async (data) => {
     try {
-      await axios.patch(`${process.env.API_URL}/exchanges/${exchangeId}`, data);
+      await axios.patch(`${api_url}/exchanges/${exchangeId}`, data);
       navigation.goBack();
     } catch (error) {
       console.log(error);

@@ -6,7 +6,6 @@ import axios from "axios";
 import { globalStyles } from "../../constants/global";
 import CustomProfileImage from "../../components/CustomProfileImage";
 import { CustomButton } from "../../components/CustomButton";
-import { handleDateFormat } from "../../services/handleDateFormat";
 import { useNavigation } from "@react-navigation/native";
 import Modal from "react-native-modal";
 
@@ -88,7 +87,9 @@ export default function ExchangeDetailScreen({ route }) {
       <View style={styles.contentContainer}>
         <Text style={styles.contentTitle}>{title}</Text>
         <Text style={styles.contentBody}>{content}</Text>
-        <Text style={styles.contentDate}>{handleDateFormat(createDate)}</Text>
+        <Text
+          style={styles.contentDate}
+        >{`${createDate.substring(0, 10)} ${createDate.substring(11, 16)}`}</Text>
       </View>
       {id === memberId && (
         <>
