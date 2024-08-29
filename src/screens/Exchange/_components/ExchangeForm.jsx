@@ -65,7 +65,7 @@ export function ExchangeForm({
     formData.append("regionId", selectedChildRegion);
 
     if (selectedImage) {
-      formData.append("exchangeImageFiles", {
+      formData.append("image", {
         uri: selectedImage.uri,
         name: selectedImage.filename || "image.jpg",
         type: selectedImage.mimeType || "image/jpeg",
@@ -75,6 +75,7 @@ export function ExchangeForm({
     if (isEdit) {
       formData.append("status", selectedIsTraded ? "TRADED" : "ACTIVE");
     }
+    console.log(formData);
     onSubmit(formData);
   };
 

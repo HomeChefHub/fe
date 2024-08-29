@@ -11,7 +11,7 @@ export function FridgeForm({ name = "", expirationDate = null, onSubmit }) {
   const [selectedName, setSelectedName] = useState(name);
   const [selectedExpirationDate, setSelectedExpirationDate] =
     useState(expirationDate);
-  const [selectedIngredientImages, setSelectedIngredientImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleSubmit = () => {
     const formData = new FormData();
@@ -21,11 +21,11 @@ export function FridgeForm({ name = "", expirationDate = null, onSubmit }) {
       format(selectedExpirationDate, "yyyy-MM-dd'T'HH:mm:ss"),
     );
 
-    if (selectedIngredientImages.length > 0) {
-      formData.append("ingredientImages", {
-        uri: selectedIngredientImages.uri,
-        name: selectedIngredientImages.filename || "image.jpg",
-        type: selectedIngredientImages.mimeType || "image/jpeg",
+    if (selectedImage) {
+      formData.append("image", {
+        uri: selectedImage.uri,
+        name: selectedImage.filename || "image.jpg",
+        type: selectedImage.mimeType || "image/jpeg",
       });
     }
 
@@ -34,7 +34,7 @@ export function FridgeForm({ name = "", expirationDate = null, onSubmit }) {
 
   return (
     <ScrollView>
-      <CustomImageUploadField onImageSelect={setSelectedIngredientImages} />
+      <CustomImageUploadField onImageSelect={setSelectedImage} />
       <CustomTextField
         title={"음식 이름을 입력해 주세요."}
         fieldHeight={40}
