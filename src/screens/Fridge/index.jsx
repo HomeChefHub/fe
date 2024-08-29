@@ -82,7 +82,7 @@ export default function FridgeScreen() {
         data={fridgeList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <FridgeCard item={item} onDelete={handleDelete} />
+          <FridgeCard ingredient={item} onDelete={handleDelete} />
         )}
         onEndReached={() => fetchFridgeList(false)}
         onEndReachedThreshold={0.5}

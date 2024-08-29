@@ -7,16 +7,16 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
 
-export function FridgeCard({ item, onDelete }) {
+export function FridgeCard({ ingredient, onDelete }) {
   const [isOption, setIsOption] = useState(false);
   const navigation = useNavigation();
 
   return (
     <View style={styles.itemContainer}>
       <CustomRowCard
-        title={item.name}
-        imageUrl={item.thumbnailUrl}
-        date={format(item.expirationDate, "yyyy-MM-dd")}
+        title={ingredient.name}
+        imageUrl={ingredient.thumbnailUrl}
+        date={format(ingredient.expirationDate, "yyyy-MM-dd")}
       />
       <TouchableOpacity
         style={styles.threeDotsContainer}
@@ -30,7 +30,7 @@ export function FridgeCard({ item, onDelete }) {
             style={styles.optionButton}
             onPress={() =>
               navigation.navigate("FridgeEdit", {
-                ingredientId: item.id,
+                ingredient,
               })
             }
           >

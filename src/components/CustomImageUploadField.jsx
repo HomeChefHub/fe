@@ -5,7 +5,11 @@ import { svg } from "../assets/svg";
 import { border, color, font, spacing } from "../constants/constants";
 import * as ImagePicker from "expo-image-picker";
 
-export default function CustomImageUploadField({ onImageSelect }) {
+export default function CustomImageUploadField({
+  isEdit,
+  imageUrl,
+  onImageSelect,
+}) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageUpload = async () => {
@@ -23,8 +27,12 @@ export default function CustomImageUploadField({ onImageSelect }) {
 
   return (
     <TouchableOpacity style={styles.container} onPress={handleImageUpload}>
-      {selectedImage ? (
-        <Image source={{ uri: selectedImage.uri }} style={styles.image} />
+      {imageUrl || selectedImage ? (
+        isEdit ? (
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+        ) : (
+          <Image source={{ uri: selectedImage.uri }} style={styles.image} />
+        )
       ) : (
         <>
           <SvgXml xml={svg.camera} />

@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
 
 export default function FridgeEditScreen({ route }) {
-  const { item } = route.params;
+  const { ingredient } = route.params;
   const navigation = useNavigation();
 
   const handleSubmit = async (data) => {
@@ -24,9 +24,12 @@ export default function FridgeEditScreen({ route }) {
     <View style={globalStyles.container}>
       <CustomGoBackHeader text={"게시물 수정"} />
       <FridgeForm
-        title={item.name}
-        startDate={format(item.startDate, "yyyy-MM-dd'T'HH:mm:ss")}
-        endDate={format(item.endDate, "yyyy-MM-dd'T'HH:mm:ss")}
+        name={ingredient.name}
+        imageUrl={ingredient.thumbnailUrl}
+        expirationDate={format(
+          ingredient.expirationDate,
+          "yyyy-MM-dd'T'HH:mm:ss",
+        )}
         onSubmit={handleSubmit}
         isEdit={true}
       />

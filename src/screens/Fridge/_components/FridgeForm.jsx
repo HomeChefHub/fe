@@ -7,11 +7,17 @@ import CustomImageUploadField from "../../../components/CustomImageUploadField";
 import CalendarPicker from "react-native-calendar-picker";
 import { format } from "date-fns";
 
-export function FridgeForm({ name = "", expirationDate = null, onSubmit }) {
+export function FridgeForm({
+  isEdit,
+  imageUrl,
+  name = "",
+  expirationDate = null,
+  onSubmit,
+}) {
   const [selectedName, setSelectedName] = useState(name);
   const [selectedExpirationDate, setSelectedExpirationDate] =
     useState(expirationDate);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(imageUrl);
 
   const handleSubmit = () => {
     const formData = new FormData();
@@ -34,7 +40,11 @@ export function FridgeForm({ name = "", expirationDate = null, onSubmit }) {
 
   return (
     <ScrollView>
-      <CustomImageUploadField onImageSelect={setSelectedImage} />
+      <CustomImageUploadField
+        isEdit={isEdit}
+        imageUrl={imageUrl}
+        onImageSelect={setSelectedImage}
+      />
       <CustomTextField
         title={"음식 이름을 입력해 주세요."}
         fieldHeight={40}

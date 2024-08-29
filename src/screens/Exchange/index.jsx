@@ -27,7 +27,6 @@ export default function ExchangeScreen({ navigation }) {
       }
 
       const res = await axios.get(`${api_url}/exchanges`, { params });
-
       const newExchangeList = res.data.content;
 
       if (reset) {
@@ -81,7 +80,7 @@ export default function ExchangeScreen({ navigation }) {
           />
         )}
         keyExtractor={(item) => item.exchangeId}
-        onEndReached={() => fetchExchangeList(false)} // false를 명시적으로 전달
+        onEndReached={() => fetchExchangeList(false)}
         onEndReachedThreshold={0.5}
         ListEmptyComponent={<Text>교환 게시물이 없습니다.</Text>}
       />
