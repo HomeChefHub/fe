@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
 import { globalStyles } from "../../constants/global";
-import { ExchangeForm } from "./_components/ExchangeForm"; // Import the new component
+import { ExchangeForm } from "./_components/ExchangeForm";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
@@ -20,7 +20,7 @@ export default function ExchangeEditScreen({ route }) {
     }
   };
 
-  const { title, content } = exchangeDetail;
+  const { title, content, imageUrls } = exchangeDetail;
 
   return (
     <View style={globalStyles.container}>
@@ -28,7 +28,7 @@ export default function ExchangeEditScreen({ route }) {
       <ExchangeForm
         title={title}
         content={content}
-        regionId={16}
+        imageUrl={imageUrls[0]}
         onSubmit={handleSubmit}
         isEdit={true}
       />

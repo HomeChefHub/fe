@@ -11,6 +11,7 @@ import CustomImageUploadField from "../../../components/CustomImageUploadField";
 export function ExchangeForm({
   title = "",
   content = "",
+  imageUrl,
   onSubmit,
   isEdit = false,
 }) {
@@ -21,7 +22,7 @@ export function ExchangeForm({
   const [selectedTitle, setSelectedTitle] = useState(title);
   const [selectedContent, setSelectedContent] = useState(content);
   const [selectedIsTraded, setSelectedIsTraded] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(imageUrl);
 
   const fetchRegion = async () => {
     try {
@@ -75,13 +76,16 @@ export function ExchangeForm({
     if (isEdit) {
       formData.append("status", selectedIsTraded ? "TRADED" : "ACTIVE");
     }
-    console.log(formData);
     onSubmit(formData);
   };
 
   return (
     <ScrollView>
-      <CustomImageUploadField onImageSelect={setSelectedImage} />
+      <CustomImageUploadField
+        isEdit={isEdit}
+        onImageSelect={setSelectedImage}
+        imageUrl={imageUrl}
+      />
       <CustomTextField
         title={"제목"}
         fieldHeight={40}

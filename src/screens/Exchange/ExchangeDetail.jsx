@@ -87,9 +87,11 @@ export default function ExchangeDetailScreen({ route }) {
       <View style={styles.contentContainer}>
         <Text style={styles.contentTitle}>{title}</Text>
         <Text style={styles.contentBody}>{content}</Text>
-        <Text
-          style={styles.contentDate}
-        >{`${createDate.substring(0, 10)} ${createDate.substring(11, 16)}`}</Text>
+        {createDate && (
+          <Text
+            style={styles.contentDate}
+          >{`${createDate.substring(0, 10)} ${createDate.substring(11, 16)}`}</Text>
+        )}
       </View>
       {id === memberId && (
         <>
