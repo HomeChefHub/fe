@@ -8,12 +8,12 @@ import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
 
 export default function FridgeEditScreen({ route }) {
-  const { item, memberId } = route.params;
+  const { item } = route.params;
   const navigation = useNavigation();
 
   const handleSubmit = async (data) => {
     try {
-      await axios.patch(`${process.env.API_URL}/refrigerator/${item.id}`, data);
+      await axios.patch(`${process.env.API_URL}/ingredients/${item.id}`, data);
       navigation.goBack();
     } catch (error) {
       console.log(error);
@@ -24,7 +24,6 @@ export default function FridgeEditScreen({ route }) {
     <View style={globalStyles.container}>
       <CustomGoBackHeader text={"게시물 수정"} />
       <FridgeForm
-        id={memberId}
         title={item.name}
         startDate={format(item.startDate, "yyyy-MM-dd'T'HH:mm:ss")}
         endDate={format(item.endDate, "yyyy-MM-dd'T'HH:mm:ss")}
