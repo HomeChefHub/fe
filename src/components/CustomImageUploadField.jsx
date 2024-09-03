@@ -6,11 +6,12 @@ import { border, color, font, spacing } from "../constants/constants";
 import * as ImagePicker from "expo-image-picker";
 
 export default function CustomImageUploadField({
-  isEdit,
+  isEdit = false,
   imageUrl,
   onImageSelect,
 }) {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isEditing, setIsEditing] = useState(isEdit);
 
   const handleImageUpload = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -23,12 +24,14 @@ export default function CustomImageUploadField({
       setSelectedImage(uploadImage);
       onImageSelect(uploadImage);
     }
+
+    setIsEditing(false);
   };
 
   return (
     <TouchableOpacity style={styles.container} onPress={handleImageUpload}>
       {imageUrl || selectedImage ? (
-        isEdit ? (
+        isEditing ? (
           <Image source={{ uri: imageUrl }} style={styles.image} />
         ) : (
           <Image source={{ uri: selectedImage.uri }} style={styles.image} />
