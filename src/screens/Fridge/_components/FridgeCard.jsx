@@ -2,7 +2,7 @@ import { CustomRowCard } from "../../../components/CustomRowCard";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SvgXml } from "react-native-svg";
 import { svg } from "../../../assets/svg";
-import { font, spacing } from "../../../constants/constants";
+import { border, color, font, spacing } from "../../../constants/constants";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
@@ -18,6 +18,13 @@ export function FridgeCard({ ingredient, onDelete }) {
         imageUrl={ingredient.thumbnailUrl}
         date={format(ingredient.expirationDate, "yyyy-MM-dd")}
       />
+      {ingredient.daysUntilExpiration <= 7 && (
+        <View style={styles.badgeContainer}>
+          <Text style={styles.badgeText}>
+            D - {ingredient.daysUntilExpiration}
+          </Text>
+        </View>
+      )}
       <TouchableOpacity
         style={styles.threeDotsContainer}
         onPress={() => setIsOption(!isOption)}
@@ -52,6 +59,20 @@ const styles = StyleSheet.create({
   itemContainer: {
     position: "relative",
     marginBottom: 10,
+  },
+  badgeContainer: {
+    position: "absolute",
+    top: 6,
+    left: 6,
+    backgroundColor: color.red,
+    paddingHorizontal: spacing.s8,
+    paddingVertical: spacing.s4,
+    borderRadius: border.radius.full,
+  },
+  badgeText: {
+    color: color.text.inverse,
+    fontSize: font.body.md,
+    fontWeight: "bold",
   },
   threeDotsContainer: {
     width: 30,
