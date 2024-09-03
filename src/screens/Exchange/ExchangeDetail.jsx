@@ -1,12 +1,12 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { CustomGoBackHeader } from "../../components/CustomGoBackHeader";
 import { border, color, font, spacing } from "../../constants/constants";
 import axios from "axios";
 import { globalStyles } from "../../constants/global";
 import CustomProfileImage from "../../components/CustomProfileImage";
 import { CustomButton } from "../../components/CustomButton";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Modal from "react-native-modal";
 
 export default function ExchangeDetailScreen({ route }) {
@@ -27,9 +27,11 @@ export default function ExchangeDetailScreen({ route }) {
     }
   };
 
-  useEffect(() => {
-    fetchExchangeDetail();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchExchangeDetail();
+    }, []),
+  );
 
   const {
     title,
