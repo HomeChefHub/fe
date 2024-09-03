@@ -38,7 +38,7 @@ export function FridgeCard({ ingredient, onDelete }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.optionButton}
-            onPress={() => onDelete(item.id)}
+            onPress={() => onDelete(ingredient.id)}
           >
             <Text style={styles.optionText}>삭제</Text>
           </TouchableOpacity>

@@ -13,7 +13,10 @@ export default function FridgeEditScreen({ route }) {
 
   const handleSubmit = async (data) => {
     try {
-      await axios.patch(`${process.env.API_URL}/ingredients/${item.id}`, data);
+      await axios.patch(
+        `${process.env.API_URL}/ingredients/${ingredient.id}`,
+        data,
+      );
       navigation.goBack();
     } catch (error) {
       console.log(error);
