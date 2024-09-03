@@ -9,7 +9,7 @@ import { format } from "date-fns";
 
 export function FridgeForm({
   isEdit,
-  imageUrl,
+  imageUrl = null,
   name = "",
   expirationDate = null,
   onSubmit,
@@ -29,7 +29,7 @@ export function FridgeForm({
 
     if (selectedImage) {
       formData.append("image", {
-        uri: selectedImage.uri,
+        uri: isEdit ? selectedImage.uri : selectedImage.url,
         name: selectedImage.filename || "image.jpg",
         type: selectedImage.mimeType || "image/jpeg",
       });
