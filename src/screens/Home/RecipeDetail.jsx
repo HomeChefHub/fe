@@ -15,46 +15,42 @@ import { SvgXml } from "react-native-svg";
 import { svg } from "../../assets/svg";
 
 export default function RecipeDetailScreen({ route }) {
-  const { id } = route.params;
+  const api_url = process.env.API_URL;
+  const { recipeId } = route.params;
   const [recipeList, setRecipeList] = useState({});
-  const [isFavorite, setIsFavorite] = useState(false);
-  const memberId = 1;
+  const [isLike, setIsLike] = useState(false);
 
   const fetchRecipeDetail = async () => {
     try {
-      const res = await axios.get(`${process.env.API_URL}/recipes/${id}`);
+      const res = await axios.get(`${api_url}/recipes/${recipeId}`);
       setRecipeList(res.data);
-      checkIsFavorite(res.data.content);
+      await checkIsLike(); // Pass recipeId to checkIsLike
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchFavorites = async () => {
+  const fetchLikes = async () => {
     try {
-      const res = await axios.get(
-        `${Config.API_URL}/recipes/members/${memberId}/favorites?size=5`,
-      );
+      const res = await axios.get(`${api_url}/recipes/likes`);
       return res.data.content;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  const checkIsFavorite = async () => {
-    const favorites = await fetchFavorites();
-    const isFavorite = favorites.find((recipe) => recipe.id === id);
-    setIsFavorite(isFavorite);
+  const checkIsLike = async () => {
+    const likes = await fetchLikes();
+    const likeExists = likes.some((recipe) => recipe.id === recipeId);
+    setIsLike(likeExists);
   };
 
-  const handleFavorites = async () => {
+  const handleLikes = async () => {
     try {
-      await axios.post(
-        `${process.env.API_URL}/recipes/toggle-favorite/${memberId}/${id}`,
-      );
-      setIsFavorite(!isFavorite);
-    } catch (error) {
-      console.log(error);
+      await axios.post(`${api_url}/recipes/likes`, { recipeId });
+      setIsLike(!isLike);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -64,43 +60,35 @@ export default function RecipeDetailScreen({ route }) {
 
   const {
     name = "",
-    imgSrc = "",
+    thumbnail = "",
     tip = "",
-    recipeIngredientResponseList = [],
-    manualResponseList = [],
+    ingredients = "",
+    manuals = [],
   } = recipeList;
 
   return (
     <ScrollView style={globalStyles.container}>
       <CustomGoBackHeader text={name} />
       <View style={styles.imgContainer}>
-        <Image source={{ uri: imgSrc }} style={styles.image} />
+        <Image source={{ uri: thumbnail }} style={styles.image} />
         <TouchableOpacity
           style={styles.heartIconContainer}
-          onPress={handleFavorites}
+          onPress={handleLikes}
         >
-          <SvgXml xml={isFavorite ? svg.heartFilled : svg.heart} />
+          <SvgXml xml={isLike ? svg.heartFilled : svg.heart} />
         </TouchableOpacity>
       </View>
 
       <View>
         <Text style={styles.title}>재료</Text>
-        <View style={styles.ingredientContainer}>
-          {recipeIngredientResponseList.map((ingredient, index) => (
-            <View key={index} style={{ width: "50%" }}>
-              <Text style={styles.text}>
-                {ingredient.name} {ingredient.quantity}
-              </Text>
-            </View>
-          ))}
-        </View>
+        <Text style={styles.text}>{ingredients}</Text>
       </View>
 
       <View style={styles.divider}></View>
 
       <View style={{ marginBottom: 24 }}>
         <Text style={styles.title}>조리법</Text>
-        {manualResponseList.map((manual, index) => (
+        {manuals.map((manual, index) => (
           <Text key={index} style={styles.text}>
             {manual.content}
           </Text>
@@ -108,10 +96,16 @@ export default function RecipeDetailScreen({ route }) {
       </View>
 
       <View style={styles.tipContainer}>
-        <SvgXml xml={svg.tip} style={styles.tipIcon} />
-        <View style={styles.tipTextContainer}>
+        <View style={styles.tipTitleContainer}>
+          <SvgXml xml={svg.tip} />
           <Text style={styles.tipTitle}>Tip</Text>
-          <Text style={styles.tipText}>{tip}</Text>
+        </View>
+        <View style={styles.tipTextContainer}>
+          {tip.split(". ").map((sentence, index) => (
+            <Text key={index} style={styles.tipText}>
+              {sentence}
+            </Text>
+          ))}
         </View>
       </View>
     </ScrollView>
@@ -145,10 +139,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: spacing.s8,
   },
-  ingredientContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
   text: {
     fontSize: font.body.md,
     color: color.text.secondary,
@@ -160,8 +150,6 @@ const styles = StyleSheet.create({
     marginVertical: spacing.s20,
   },
   tipContainer: {
-    display: "flex",
-    flexDirection: "row",
     backgroundColor: "#EDF2FF",
     padding: spacing.s16,
     borderColor: "#BAC8FF",
@@ -169,19 +157,24 @@ const styles = StyleSheet.create({
     borderRadius: border.radius.md,
     marginBottom: spacing.s28,
   },
-  tipTextContainer: {
-    flex: 1,
-    marginLeft: spacing.s8,
-    marginBottom: spacing.s8,
+  tipTitleContainer: {
+    display: "flex",
+    flexDirection: "row",
   },
   tipTitle: {
     color: "#4263EB",
     fontSize: font.title.md,
     fontWeight: "bold",
-    marginRight: spacing.s8,
+    marginLeft: spacing.s8,
+    marginBottom: spacing.s4,
+  },
+  tipTextContainer: {
+    flex: 1,
+    marginLeft: spacing.s8,
     marginBottom: spacing.s8,
   },
   tipText: {
     fontSize: font.body.md,
+    marginTop: spacing.s8,
   },
 });
