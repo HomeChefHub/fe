@@ -23,7 +23,7 @@ export default function FridgeScreen() {
 
     try {
       const params = {};
-      if (keyword) params.keyword = keyword;
+      if (keyword) params.ingredientName = keyword;
       if (lastIngredientId && daysUntilExpiration && !reset) {
         params.lastIngredientId = lastIngredientId;
         params.daysUntilExpiration = daysUntilExpiration;
