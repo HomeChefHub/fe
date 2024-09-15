@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { globalStyles } from "../../constants/global";
 import { CustomHeader } from "../../components/CustomHeader";
 import CustomProfileImage from "../../components/CustomProfileImage";
@@ -6,6 +6,8 @@ import { color, font, spacing } from "../../constants/constants";
 import { SvgXml } from "react-native-svg";
 import { svg } from "../../assets/svg";
 import { CustomButton } from "../../components/CustomButton";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const myPageList = [
   { key: "notice", label: "공지사항", icon: svg.bell },
@@ -14,6 +16,8 @@ const myPageList = [
 ];
 
 export default function MyPageScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={globalStyles.container}>
       <CustomHeader title={"마이페이지"} />
@@ -22,6 +26,12 @@ export default function MyPageScreen() {
         <Text style={styles.nickname}>닉네임</Text>
         <CustomButton text={"프로필 수정"} style={{ width: 100 }} />
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate("KakaoLogin")}>
+        <Image
+          source={require("../../assets/kakao_login.png")}
+          style={styles.kakao_login}
+        />
+      </TouchableOpacity>
       <View style={styles.listContainer}>
         {myPageList.map((item) => (
           <View key={item.key} style={styles.list}>
@@ -47,6 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: font.title.md,
     fontWeight: "bold",
+  },
+  kakao_login: {
+    marginTop: spacing.s16,
+    width: "100%",
   },
   listContainer: {
     marginTop: spacing.s28,

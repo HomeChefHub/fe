@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ChatScreen from "../screens/Chat";
-import MyPageScreen from "../screens/MyPage";
 import { color } from "../constants/constants";
 import { SvgXml } from "react-native-svg";
 import { svg } from "../assets/svg";
 import ExchangeStackNavigator from "./ExchangeStackNavigator";
 import HomeStackNavigator from "./HomeStackNavigator";
 import FridgeStackNavigator from "./FridgeStackNavigator";
+import MyPageStackNavigator from "./MyPageStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,7 +67,7 @@ export default function BottomTabBar() {
       />
       <Tab.Screen
         name="마이페이지"
-        component={MyPageScreen}
+        component={MyPageStackNavigator}
         options={{
           tabBarLabel: "마이페이지",
           tabBarIcon: ({ color, size }) => (
